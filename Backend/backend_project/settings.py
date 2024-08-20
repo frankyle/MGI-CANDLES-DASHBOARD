@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     # Custom
     'api',
     'mgicandles',
-    # 'trading_ideas',
+    'trading_ideas',
 
     # Third Party
     'rest_framework',
