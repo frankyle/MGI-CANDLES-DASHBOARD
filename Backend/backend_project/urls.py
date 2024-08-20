@@ -7,6 +7,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
     path('api/mgi/', include('mgicandles.urls')),
-    # path('api/newidea/', include('trading_ideas.urls')),
+    path('api/newidea/', include('trading_ideas.urls')),
 
 ]
