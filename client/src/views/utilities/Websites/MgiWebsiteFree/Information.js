@@ -1,174 +1,141 @@
-import React from 'react'
+import React from 'react';
+import { Typography, TextField, Button, Grid, Paper } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
-const Information = () => {
-  return (
-    <div class="info_section layout_padding">
-    <div class="container links_container">
-      <div class="row ">
-        <div class="col-md-3 mt-0">
-          <h3 class="design_heading">
-            Let’s design
-            together
-          </h3>
-          <ul>
-            <li>
-              <a href="">
-                There are many variat
-              </a>
-            </li>
-            <li>
-              <a href="">
-                ions of passages of L
-              </a>
-            </li>
-            <li>
-              <a href="">
-                orem Ipsum available
-              </a>
-            </li>
-            <li>
-              <a href="">
-                but the majority h
-              </a>
-            </li>
-            <li>
-              <a href="">
-                ave suffered altera
-              </a>
-            </li>
-            <li>
-              <a href="">
-                tion in some form, by
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-3">
-          <h3>
-            LET US HELP YOU
-          </h3>
-          <ul>
-            <li>
-              <a href="">
-                There are many variat
-              </a>
-            </li>
-            <li>
-              <a href="">
-                ions of passages of L
-              </a>
-            </li>
-            <li>
-              <a href="">
-                orem Ipsum available
-              </a>
-            </li>
-            <li>
-              <a href="">
-                but the majority h
-              </a>
-            </li>
-            <li>
-              <a href="">
-                ave suffered altera
-              </a>
-            </li>
-            <li>
-              <a href="">
-                tion in some form, by
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-3">
-          <h3>
-            INFORMATION
-          </h3>
-          <ul>
-            <li>
-              <a href="">
-                About Us
-              </a>
-            </li>
-            <li>
-              <a href="">
-                Careers
-              </a>
-            </li>
-            <li>
-              <a href="">
-                Sell on shop
-              </a>
-            </li>
-            <li>
-              <a href="">
-                Press & News
-              </a>
-            </li>
-            <li>
-              <a href="">
-                Competitions
-              </a>
-            </li>
-            <li>
-              <a href="">
-                Terms & Conditions
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-3">
-          <h3>
-            OUR Design
-          </h3>
-          <ul>
-            <li>
-              <a href="">
-                There are many variat
-              </a>
-            </li>
-            <li>
-              <a href="">
-                ions of passages of L
-              </a>
-            </li>
-            <li>
-              <a href="">
-                orem Ipsum available
-              </a>
-            </li>
-            <li>
-              <a href="">
-                but the majority h
-              </a>
-            </li>
-            <li>
-              <a href="">
-                ave suffered altera
-              </a>
-            </li>
-            <li>
-              <a href="">
-                tion in some form, by
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 ml-auto">
-          <form action="">
-            <input type="email" placeholder="Enter your email"/>
-            <button>
+// Custom styled components
+const InfoSection = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(4),
+  backgroundColor: theme.palette.background.default,
+  boxShadow: theme.shadows[3],
+  borderRadius: '8px',
+}));
+
+const InfoHeading = styled(Typography)(({ theme }) => ({
+  marginBottom: theme.spacing(2),
+  fontWeight: 'bold',
+}));
+
+const InfoList = styled('ul')({
+  listStyle: 'none',
+  padding: 0,
+  margin: 0,
+  '& li': {
+    marginBottom: '10px',
+  },
+  '& a': {
+    textDecoration: 'none',
+    color: '#1976d2',
+    fontSize: '14px',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
+});
+
+const InfoSectionContent = styled('div')({
+  marginBottom: '20px',
+});
+
+const SubscribeForm = styled('form')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  '& input': {
+    marginBottom: '10px',
+    width: '100%',
+    maxWidth: '300px',
+  },
+  '& button': {
+    padding: '10px 20px',
+    border: 'none',
+    backgroundColor: '#1976d2',
+    color: '#fff',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: '#155a8a',
+    },
+  },
+});
+
+const Information = () => (
+  <div className="info_section layout_padding">
+    <div className="container">
+      <Typography variant="h2" component="h2" align="center" gutterBottom>
+        Forex Insights & Resources
+      </Typography>
+      <Grid container spacing={4}>
+        <Grid item md={3}>
+          <InfoSection>
+            <InfoHeading variant="h6">
+              Forex Signals
+            </InfoHeading>
+            <InfoList>
+              <li><a href="#">Real-Time Forex Signals</a></li>
+              <li><a href="#">Daily Market Analysis</a></li>
+              <li><a href="#">Technical Analysis Updates</a></li>
+              <li><a href="#">Trading Alerts & Notifications</a></li>
+            </InfoList>
+          </InfoSection>
+        </Grid>
+        <Grid item md={3}>
+          <InfoSection>
+            <InfoHeading variant="h6">
+              Forex Education
+            </InfoHeading>
+            <InfoList>
+              <li><a href="#">Forex Trading Basics</a></li>
+              <li><a href="#">Advanced Trading Strategies</a></li>
+              <li><a href="#">Market Trends & Insights</a></li>
+              <li><a href="#">Educational Webinars & Workshops</a></li>
+            </InfoList>
+          </InfoSection>
+        </Grid>
+        <Grid item md={3}>
+          <InfoSection>
+            <InfoHeading variant="h6">
+              Forex Mentorship
+            </InfoHeading>
+            <InfoList>
+              <li><a href="#">Personalized Trading Mentorship</a></li>
+              <li><a href="#">One-on-One Coaching Sessions</a></li>
+              <li><a href="#">Mentorship Programs & Plans</a></li>
+              <li><a href="#">Expert Guidance & Support</a></li>
+            </InfoList>
+          </InfoSection>
+        </Grid>
+        <Grid item md={3}>
+          <InfoSection>
+            <InfoHeading variant="h6">
+              Forex Advice & Services
+            </InfoHeading>
+            <InfoList>
+              <li><a href="#">Expert Forex Advice</a></li>
+              <li><a href="#">Market Forecasts</a></li>
+              <li><a href="#">Custom Trading Strategies</a></li>
+              <li><a href="#">Wakala Agent Services</a></li>
+            </InfoList>
+          </InfoSection>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2} justifyContent="center" mt={4}>
+        <Grid item md={6}>
+          <SubscribeForm>
+            <TextField
+              variant="outlined"
+              label="Enter your email"
+              type="email"
+              fullWidth
+              required
+            />
+            <Button type="submit" variant="contained">
               Subscribe
-            </button>
-          </form>
-        </div>
-      </div>
+            </Button>
+          </SubscribeForm>
+        </Grid>
+      </Grid>
     </div>
   </div>
+);
 
-  )
-}
-
-export default Information
+export default Information;
