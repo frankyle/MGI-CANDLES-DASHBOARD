@@ -6,6 +6,7 @@ import AdvertiseSection from './AdvertiseSection';
 import MembershipSection from './MembershipSection';
 import Footer from './Footer';
 import ContactUs from './ContactUs';
+import Information from './Information';
 
 const MgiWebsiteFree = () => {
   return (
@@ -16,6 +17,7 @@ const MgiWebsiteFree = () => {
       <div id="advertise-section"><AdvertiseSection/></div>
       <div id="membership-section"><MembershipSection/></div>
       <div id="contact-us"><ContactUs/></div>
+      <div id="info"><Information/></div>
       <div id="footer"><Footer/></div>
     </div>
   );

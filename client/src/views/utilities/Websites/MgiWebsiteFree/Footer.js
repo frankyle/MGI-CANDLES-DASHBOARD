@@ -7,14 +7,34 @@ import MainCard from 'ui-component/cards/MainCard';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const Footer = () => (
-  <MainCard title="Footer Section">
-    <Typography variant="body2">
-      Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif ad
-      minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in reprehended
-      in voltage veil esse colum doolie eu fujian bulla parian. Exceptive sin ocean cuspidate non president, sunk in culpa qui officiate
-      descent molls anim id est labours.
-    </Typography>
-  </MainCard>
+  <div class=" footer_section">
+    <div class="info_social">
+      <div>
+        <a href="">
+          <img src="./assets/images/fb.png" alt=""/>
+        </a>
+      </div>
+      <div>
+        <a href="">
+          <img src="./assets/images/twitter.png" alt=""/>
+        </a>
+      </div>
+      <div>
+        <a href="">
+          <img src="./assets/images/linkedin.png" alt=""/>
+        </a>
+      </div>
+      <div>
+        <a href="">
+          <img src="./assets/images/instagram.png" alt=""/>
+        </a>
+      </div>
+    </div>
+    <p>
+      &copy; <span id="displayYear"></span> All Rights Reserved. Design by
+      <a href="">Muhammad SamiUllah</a>
+    </p>
+  </div>
 );
 
 export default Footer;

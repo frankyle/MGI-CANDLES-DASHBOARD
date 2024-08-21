@@ -8,14 +8,37 @@ import MainCard from 'ui-component/cards/MainCard';
 
 const AboutSection = () => (
 
-  <MainCard title="About Section">
-    <Typography variant="body2">
-      Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif ad
-      minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in reprehended
-      in voltage veil esse colum doolie eu fujian bulla parian. Exceptive sin ocean cuspidate non president, sunk in culpa qui officiate
-      descent molls anim id est labours.
-    </Typography>
-  </MainCard>
+  <div class="about_section layout_padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="img-box">
+            <img src="./assets/images/about-img.png" alt=""/>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="detail-box">
+            <div>
+              <h2>
+                About Us
+              </h2>
+              <p>
+                There are many variations of passages of Lorem Ipsum available, but the majority have suffered
+                alteration
+                in some form, by injected humour, or randomised words which don't look even slightly believableThere are
+                many variations of passages of Lorem Ipsum available, but the majority have able
+              </p>
+              <div class="d-flex justify-content-end">
+                <a href="">
+                  Read More
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 );
 
 export default AboutSection;

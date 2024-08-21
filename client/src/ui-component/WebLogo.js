@@ -18,7 +18,7 @@ const WebLogo = () => {
        * <img src={logo} alt="Berry" width="100" />
        *
        */
-      <h1>Website Logo</h1>
+      <h1>MGI Candles</h1>
     );
   };
   
