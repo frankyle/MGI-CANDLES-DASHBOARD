@@ -7,14 +7,58 @@ import MainCard from 'ui-component/cards/MainCard';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const AdvertiseSection = () => (
-  <MainCard title="Advertise Section">
-    <Typography variant="body2">
-      Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif ad
-      minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in reprehended
-      in voltage veil esse colum doolie eu fujian bulla parian. Exceptive sin ocean cuspidate non president, sunk in culpa qui officiate
-      descent molls anim id est labours.
-    </Typography>
-  </MainCard>
+  <div class="concept_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          OUR CONCEPT
+        </h2>
+        <p>
+          There are many variations of passages of Lorem Ipsum
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="box">
+            <div class="img-box">
+              <img src="./assets/images/c-1.png" alt=""/>
+              <div class="search-box" data-toggle="modal" data-bigimage="images/c-1.png" data-target="#myModal">
+                <img src="./assets/images/serch-icon.png" alt=""/>
+              </div>
+            </div>
+            <div class="detail-box">
+              <h5>
+                tempor incididunt ut labore et dolore
+              </h5>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="box">
+            <div class="img-box">
+              <img src="./assets/images/c-2.png" alt=""/>
+              <div class="search-box" data-bigimage="images/c-2.png" data-toggle="modal" data-target="#myModal">
+                <img src="./assets/images/serch-icon.png" alt=""/>
+              </div>
+            </div>
+            <div class="detail-box">
+              <h5>
+                tempor incididunt ut labore et dolore
+              </h5>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 );
 
 export default AdvertiseSection;

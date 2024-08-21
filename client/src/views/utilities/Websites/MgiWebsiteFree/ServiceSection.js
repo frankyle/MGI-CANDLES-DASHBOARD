@@ -7,14 +7,92 @@ import MainCard from 'ui-component/cards/MainCard';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const ServiceSection = () => (
-  <MainCard title="Service Section">
-    <Typography variant="body2">
-      Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif ad
-      minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in reprehended
-      in voltage veil esse colum doolie eu fujian bulla parian. Exceptive sin ocean cuspidate non president, sunk in culpa qui officiate
-      descent molls anim id est labours.
-    </Typography>
-  </MainCard>
+  <div class="service_section layout_padding">
+    <div class="container">
+    <div class="heading_container">
+      <h2>
+        our services
+      </h2>
+      <p>
+        There are many variations of passages of Lorem Ipsum
+      </p>
+    </div>
+    <div class="service_container">
+      <div class="box">
+        <div class="img-box">
+          <img src="./assets/images/cabinet.png" alt=""/>
+        </div>
+        <div class="detail-box">
+          <h5>
+            furnitures
+          </h5>
+          <p>
+            There are many variations of passages of Lorem Ipsum available, but the
+          </p>
+          <div>
+            <a href="">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="box">
+        <div class="img-box">
+          <img src="./assets/images/interior-design.png" alt=""/>
+        </div>
+        <div class="detail-box">
+          <h5>
+            office
+          </h5>
+          <p>
+            There are many variations of passages of Lorem Ipsum available, but the
+          </p>
+          <div>
+            <a href="">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="box">
+        <div class="img-box">
+          <img src="./assets/images/home.png" alt=""/>
+        </div>
+        <div class="detail-box">
+          <h5>
+            home
+          </h5>
+          <p>
+            There are many variations of passages of Lorem Ipsum available, but the
+          </p>
+          <div>
+            <a href="">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="box">
+        <div class="img-box">
+          <img src="./assets/images/stairs.png" alt=""/>
+        </div>
+        <div class="detail-box">
+          <h5>
+            bedroom
+          </h5>
+          <p>
+            There are many variations of passages of Lorem Ipsum available, but the
+          </p>
+          <div>
+            <a href="">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 );
 
 export default ServiceSection;
