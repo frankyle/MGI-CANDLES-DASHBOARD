@@ -6,10 +6,16 @@ const NavigationComponent = () => {
     const handleScroll = (targetId) => {
         const element = document.getElementById(targetId);
         if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+            const headerOffset = 70; // Adjust this offset to match your sticky header height
+            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = elementPosition - headerOffset;
+    
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
         }
     };
-
     return (
         <div>
             <Button 
@@ -33,13 +39,7 @@ const NavigationComponent = () => {
             >
                 About
             </Button>
-            <Button 
-                color="inherit" 
-                sx={{ marginRight: 2 }}
-                onClick={() => handleScroll('membership-section')}
-            >
-                Membership
-            </Button>
+            
             <Button 
                 color="inherit" 
                 sx={{ marginRight: 2 }}
@@ -50,9 +50,9 @@ const NavigationComponent = () => {
             <Button 
                 color="inherit" 
                 sx={{ marginRight: 2 }}
-                onClick={() => handleScroll('signal-section')}
+                onClick={() => handleScroll('membership-section')}
             >
-                Signals
+                Membership
             </Button>
             <Button 
                 color="inherit" 
