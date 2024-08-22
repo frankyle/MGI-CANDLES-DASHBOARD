@@ -15,3 +15,9 @@
 
 # Footer component
 ![alt text](image-5.png)
+
+# Membership components
+![alt text](image-6.png)
+
+# Tutorial components
+![alt text](image-7.png)
