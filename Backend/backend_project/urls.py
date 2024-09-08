@@ -8,5 +8,9 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('api/mgi/', include('mgicandles.urls')),
     path('api/newidea/', include('trading_ideas.urls')),
-
+    path('api/tracker/', include('tradetracker.urls')),
 ]
+
+# Serve media files during development
+if settings.DEBUG:  # Only serve media files when in development mode
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

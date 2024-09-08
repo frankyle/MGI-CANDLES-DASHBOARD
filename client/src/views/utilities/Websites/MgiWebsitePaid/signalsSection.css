@@ -1,0 +1,74 @@
+/* Custom styling for the arrows and dots */
+.signals-section {
+  padding-bottom: 40px; /* Adds bottom padding to the section */
+}
+
+.custom-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: -40px; /* Position arrows below the carousel */
+  z-index: 1;
+}
+
+.custom-prev-arrow {
+  left: 40px;
+}
+
+.custom-next-arrow {
+  right: 40px;
+}
+
+.custom-dots {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.custom-dots li button:before {
+  font-size: 12px;
+  color: #000; /* Color for dots */
+}
+/* signalsSection.css */
+
+.signals-section {
+    padding-bottom: 40px; /* Adds bottom padding to the section */
+    position: relative; /* Ensure that arrows are positioned correctly */
+  }
+  
+  .custom-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: -40px; /* Position arrows below the carousel */
+    z-index: 1;
+  }
+  
+  .custom-prev-arrow {
+    left: 40px;
+  }
+  
+  .custom-next-arrow {
+    right: 40px;
+  }
+  
+  .custom-dots {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .custom-dots li button:before {
+    font-size: 12px;
+    color: #000; /* Color for dots */
+  }
+  
+  .custom-dots li.slick-active button:before {
+    color: #f00; /* Active dot color */
+  }
+  
+.custom-dots li.slick-active button:before {
+  color: #f00; /* Active dot color */
+}

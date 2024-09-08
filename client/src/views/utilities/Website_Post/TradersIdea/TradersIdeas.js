@@ -83,7 +83,7 @@ function TradersIdea() {
   useEffect(() => {
     return () => {
       if (traderIdeaUrl) {
-        URL.revokeObjectURL(traderIdeaUrl);
+        URL.revokeObjectURL(traderIdeaUrl); // Clean up URL
       }
     };
   }, [traderIdeaUrl]);

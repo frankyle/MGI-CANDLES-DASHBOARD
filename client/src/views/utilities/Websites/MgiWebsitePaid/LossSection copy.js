@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import CustomCard from './CustomCard';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import './signalsSection.css'; // Add custom CSS styles
-import image1 from './../../../../assets/images/websites/hero/hero1.jpg'
+
 // Custom Arrows (Positioned beside the dots)
 const PreviousArrow = ({ onClick }) => (
   <div className="custom-arrow custom-prev-arrow">
@@ -18,7 +18,7 @@ const NextArrow = ({ onClick }) => (
   </div>
 );
 
-const SignalsSection = () => {
+const LossSection = () => {
   const settings = {
     dots: true,
     infinite: true,
@@ -52,40 +52,40 @@ const SignalsSection = () => {
 
   return (
     <div className="signals-section">
-       <Typography variant="h2" component="h1" gutterBottom align="center">
-         Daily Forex Entries
+      <Typography variant="h2" component="h1" gutterBottom align="center">
+        Break Evens Section
       </Typography>
       <Slider {...settings}>
         <Grid item>
           <CustomCard
-            image= {image1} // Replace with actual image URL
-            title1="EUR/USD Signal"
-            title2="Short Position"
-            title3="Entry: 1.1825 | TP: 1.1750"
-            description="Forex Signals Provider - 5.8K views • 3 days ago"
-          />
+           image="image4_url"
+           title1="Minimizing Losses"
+           title2="Risk-Reward Ratio Strategy"
+           title3="Maximize Profit Potential"
+           description="Smart Forex Traders - 6.7K views • 6 hours ago"
+         />
         </Grid>
         <Grid item>
           <CustomCard
-            image= {image1}
-            title1="GBP/USD Signal"
-            title2="Long Position"
-            title3="Entry: 1.3920 | TP: 1.4000"
-            description="Daily Pips Academy - 7.4K views • 2 days ago"
-          />
+           image="image4_url"
+           title1="Minimizing Losses"
+           title2="Risk-Reward Ratio Strategy"
+           title3="Maximize Profit Potential"
+           description="Smart Forex Traders - 6.7K views • 6 hours ago"
+         />
         </Grid>
         <Grid item>
           <CustomCard
-            image={image1}
-            title1="USD/JPY Signal"
-            title2="Short Position"
-            title3="Entry: 110.75 | TP: 110.00"
-            description="Pro Forex Traders - 6.2K views • 1 day ago"
-          />
+             image="image3_url"
+             title1="How to Recover from"
+             title2="a Series of Losses"
+             title3="Psychology of Trading"
+             description="Mindset Traders - 8.1K views • 1 day ago"
+           />
         </Grid>
         <Grid item>
           <CustomCard
-            image={image1}
+            image="image4_url"
             title1="AUD/USD Signal"
             title2="Long Position"
             title3="Entry: 0.7250 | TP: 0.7300"
@@ -94,20 +94,20 @@ const SignalsSection = () => {
         </Grid>
         <Grid item>
           <CustomCard
-            image={image1}
-            title1="EUR/GBP Signal"
-            title2="Short Position"
-            title3="Entry: 0.8580 | TP: 0.8500"
-            description="Pip Experts - 4.9K views • 1 day ago"
-          />
+           image="image2_url"
+           title1="Avoiding Overtrading"
+           title2="How to Manage Losses"
+           title3="With a Trading Plan"
+           description="Pip Hunters - 7.3K views • 2 days ago"
+         />
         </Grid>
         <Grid item>
           <CustomCard
-            image={image1}
-            title1="USD/CAD Signal"
-            title2="Long Position"
-            title3="Entry: 1.2580 | TP: 1.2650"
-            description="FX Masters - 3.7K views • 4 hours ago"
+            image="image1_url" // Replace with an appropriate forex-related image
+            title1="Cutting Losses Quickly"
+            title2="The Importance of Stop-Loss"
+            title3="Secure Your Capital"
+            description="Forex Academy - 5.9K views • 4 days ago"
           />
         </Grid>
       </Slider>
@@ -115,4 +115,4 @@ const SignalsSection = () => {
   );
 };
 
-export default SignalsSection;
+export default LossSection;

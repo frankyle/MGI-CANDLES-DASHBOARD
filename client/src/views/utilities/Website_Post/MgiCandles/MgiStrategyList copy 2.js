@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
 import useAxios from '../../../../routes/useAxios';
+import { Link } from 'react-router-dom';
+import { AddCircleOutline } from '@mui/icons-material';
 
-function TradersIdeaList() {
+function MgiStrategyList() {
   const api = useAxios();
   const [traderIdeas, setTraderIdeas] = useState([]);
+  const [candles, setCandles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [openImageModal, setOpenImageModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -14,19 +17,24 @@ function TradersIdeaList() {
   const [selectedIdeaToDelete, setSelectedIdeaToDelete] = useState(null);
 
   useEffect(() => {
-    const fetchTraderIdeas = async () => {
+    const fetchData = async () => {
       try {
-        const response = await api.get('/newidea/traderideas/');
-        setTraderIdeas(response.data);
+        // Fetch trader ideas
+        const traderIdeasResponse = await api.get('/mgi/traderideas/');
+        setTraderIdeas(traderIdeasResponse.data);
+
+        // Fetch candles
+        const candlesResponse = await api.get('/mgi/mgicandles/');
+        setCandles(candlesResponse.data);
       } catch (error) {
-        console.error('Error fetching Trader Ideas:', error);
+        console.error('Error fetching data:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchTraderIdeas();
-  }, []);
+    fetchData();
+  }, [api]);
 
   const handleOpenImageModal = (idea) => {
     if (idea.trader_idea) {
@@ -37,7 +45,7 @@ function TradersIdeaList() {
 
   const handleCloseImageModal = () => {
     setOpenImageModal(false);
-    setSelectedImage(null); // Clear selected image on close
+    setSelectedImage(null);
   };
 
   const handleOpenEditModal = (idea) => {
@@ -47,7 +55,7 @@ function TradersIdeaList() {
 
   const handleCloseEditModal = () => {
     setOpenEditModal(false);
-    setSelectedIdeaToEdit(null); // Clear selected idea to edit on close
+    setSelectedIdeaToEdit(null);
   };
 
   const handleOpenDeleteModal = (idea) => {
@@ -57,31 +65,40 @@ function TradersIdeaList() {
 
   const handleCloseDeleteModal = () => {
     setOpenDeleteModal(false);
-    setSelectedIdeaToDelete(null); // Clear selected idea to delete on close
+    setSelectedIdeaToDelete(null);
   };
 
   const handleEditIdea = async (idea) => {
-    // Implement your edit logic here, potentially using a modal or form to update the idea
+    // Implement your edit logic here
     console.log('Editing idea:', idea);
-    // After successful editing, update the traderIdeas state and close the modal
     handleCloseEditModal();
   };
 
   const handleDeleteIdea = async (idea) => {
-    // Implement your delete logic here, using an API call to remove the idea
-    
-    console.log('Deleting idea:', idea);
-    // After successful deletion, remove the idea from the traderIdeas state and close the modal
-    const updatedTraderIdeas = traderIdeas.filter((i) => i.id !== idea.id);
-    setTraderIdeas(updatedTraderIdeas);
-    handleCloseDeleteModal();
+    try {
+      // Implement your delete logic here
+      await api.delete(`/mgi/traderideas/${idea.id}/`);
+      const updatedTraderIdeas = traderIdeas.filter((i) => i.id !== idea.id);
+      setTraderIdeas(updatedTraderIdeas);
+    } catch (error) {
+      console.error('Error deleting idea:', error);
+    } finally {
+      handleCloseDeleteModal();
+    }
   };
 
   return (
     <Box sx={{ mt: 4 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Traders' Ideas
-      </Typography>
+      <Typography variant="h4" sx={{ mb: 3 }}>MGI Candles</Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        startIcon={<AddCircleOutline />}
+        component={Link}
+        to="/mgistrategy"
+      >
+        Create New Candle
+      </Button>
 
       {loading ? (
         <Typography>Loading...</Typography>
@@ -90,39 +107,58 @@ function TradersIdeaList() {
           <Table>
             <TableHead>
               <TableRow>
-              <TableCell>No.</TableCell>
-                <TableCell>Image (Click to View)</TableCell>
-                <TableCell>Trade Signal</TableCell>
+                <TableCell>No.</TableCell>
+                <TableCell>2hr Candle</TableCell>
+                <TableCell>Signal Candle</TableCell>
                 <TableCell>Currency Pair</TableCell>
-                <TableCell>Post Date and Time</TableCell>
-                <TableCell>Publisher Trader</TableCell>
-                <TableCell>Trader Platform</TableCell>
+                <TableCell>Trade Signal</TableCell>
+                <TableCell>Status</TableCell>
+                <TableCell>Candle Pattern</TableCell>
+                <TableCell>Fibonacci Level</TableCell>
+                <TableCell>Session</TableCell>
+                <TableCell>4hr Flip Candle</TableCell>
+                <TableCell>4hr Break of Structure</TableCell>
+                <TableCell>5Min Break of Structure</TableCell>
+                <TableCell>5Min Order Block</TableCell>
+                <TableCell>UT Alert (Change Color )</TableCell>
                 <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {traderIdeas.map((idea, index) => (
-                <TableRow key={idea.id}>
-                  <TableCell>{index + 1}</TableCell> 
-                  <TableCell onClick={() => handleOpenImageModal(idea)}>
-                    {idea.trader_idea && (
+              {traderIdeas.map((candle, index) => (
+                <TableRow key={candle.id}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell onClick={() => handleOpenImageModal(candle)}>
+                    {candle.trader_idea && (
                       <img
-                        src={idea.trader_idea}
-                        alt="Trading Idea"
+                        src={candle.hour_candle}
+                        alt="Hour Idea"
                         style={{ cursor: 'pointer', width: '150px', height: '100px' }}
                       />
                     )}
                   </TableCell>
-                  <TableCell>{idea.trade_signal}</TableCell>
-                  <TableCell>{idea.currency_pair}</TableCell>
-                  <TableCell>{new Date(idea.post_date_time).toLocaleString()}</TableCell>
-                  <TableCell>{idea.publisher_trader}</TableCell>
-                  <TableCell>{idea.trader_platform}</TableCell>
+                  <TableCell onClick={() => handleOpenImageModal(candle)}>
+                    {candle.trader_idea && (
+                      <img
+                        src={candle.signal_candle}
+                        alt="Signal Idea"
+                        style={{ cursor: 'pointer', width: '150px', height: '100px' }}
+                      />
+                    )}
+                  </TableCell>
+                  <TableCell>{candle.candle_pattern}</TableCell>
+                  <TableCell>{candle.fibonacci_level}</TableCell>
+                  <TableCell>{candle.session}</TableCell>
+                  <TableCell>{candle.flip_four_hour_candle}</TableCell>
+                  <TableCell>{candle.four_hour_break_of_structure}</TableCell>
+                  <TableCell>{candle.five_min_break_of_structure}</TableCell>
+                  <TableCell>{candle.five_min_order_block}</TableCell>
+                  <TableCell>{candle.change_color_ut_alert}</TableCell>
                   <TableCell>
-                    <Button variant="contained" color="primary" onClick={() => handleOpenEditModal(idea)}>
+                    <Button variant="contained" color="primary" onClick={() => handleOpenEditModal(candle)}>
                       Edit
                     </Button>
-                    <Button variant="contained" color="error" onClick={() => handleOpenDeleteModal(idea)}>
+                    <Button variant="contained" color="error" onClick={() => handleOpenDeleteModal(candle)}>
                       Delete
                     </Button>
                   </TableCell>
@@ -179,4 +215,4 @@ function TradersIdeaList() {
   );
 }
 
-export default TradersIdeaList;
+export default MgiStrategyList;

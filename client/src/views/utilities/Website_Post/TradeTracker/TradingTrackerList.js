@@ -1,23 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, CircularProgress, Typography } from '@mui/material';
 import useAxios from '../../../../routes/useAxios';
 
 const TradingTrackerList = () => {
-  const api = useAxios();
-  const [signals, setSignals] = useState([]);
+  const api = useAxios(); // Axios instance
+  const [signals, setSignals] = useState([]); // State to store signals
+  const [loading, setLoading] = useState(true); // State to handle loading
+  const [error, setError] = useState(null); // State to handle errors
 
-  const fetchSignals = async () => {
-    try {
-      const response = await api.get('/trade/trading-signals/');
-      setSignals(response.data);
-    } catch (error) {
-      console.error('Error fetching trading signals:', error);
-    }
-  };
-
+  // Fetch signals from the backend
   useEffect(() => {
+    const fetchSignals = async () => {
+      try {
+        const response = await api.get('/tracker/tradetracker/');
+        setSignals(response.data);
+      } catch (err) {
+        console.error('Error fetching signals:', err);
+        setError('Failed to fetch trading signals');
+      } finally {
+        setLoading(false);
+      }
+    };
+    
     fetchSignals();
-  }, [api]);
+  }, []);
+
+  if (loading) {
+    return <CircularProgress />;
+  }
+
+  if (error) {
+    return <Typography variant="h6" color="error">{error}</Typography>;
+  }
 
   return (
     <TableContainer component={Paper} sx={{ mt: 3 }}>

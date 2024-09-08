@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const NavigationComponent = () => {
 
@@ -21,7 +22,8 @@ const NavigationComponent = () => {
             <Button 
                 color="inherit" 
                 sx={{ marginRight: 2 }}
-                onClick={() => handleScroll('hero-section')}
+                component={Link} 
+                to={"/mgiwebsitefree"}
             >
                 Home
             </Button>
