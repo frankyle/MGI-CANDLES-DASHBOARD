@@ -74,9 +74,23 @@ const MgiStrategyEditForm = ({ open, onClose, candleToEdit, fetchCandles }) => {
     }
 
     const formData = new FormData();
+
+    // Append non-file fields to formData
     Object.keys(candle).forEach(key => {
-      formData.append(key, candle[key]);
-    });
+      if (key !== 'signal_candle' && key !== 'hour_candle') {
+        formData.append(key, candle[key]);
+      } 
+     });
+
+      // Only append signal_candle if a new file was selected
+  if (candle.signal_candle instanceof File) {
+    formData.append('signal_candle', candle.signal_candle);
+  }
+
+  // Only append hour_candle if a new file was selected
+  if (candle.hour_candle instanceof File) {
+    formData.append('hour_candle', candle.hour_candle);
+  }
 
     try {
       const response = await api.put(`/mgi/mgicandles/${candle.id}/`, formData, {

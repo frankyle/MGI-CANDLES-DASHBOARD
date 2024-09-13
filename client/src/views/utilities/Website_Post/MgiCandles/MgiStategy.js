@@ -31,7 +31,7 @@ const MgiStrategy = () => {
   const { user } = useSelector((state) => state.auth);
   const [message, setMessage] = useState('');
   const [signalCandle, setSignalCandle] = useState(null);
-  const [hourCandle, setHourCandle] = useState(null);
+  const [hourCandle, setHourCandle] = useState(null)
   const [signalCandleUrl, setSignalCandleUrl] = useState(null);
   const [hourCandleUrl, setHourCandleUrl] = useState(null);
   const [tradeSignal, setTradeSignal] = useState('');
@@ -167,31 +167,34 @@ const MgiStrategy = () => {
         <FormControl fullWidth sx={{ mt: 2 }}>
           <InputLabel>Currency Pair</InputLabel>
           <Select value={currencyPair} onChange={(e) => setCurrencyPair(e.target.value)}>
-          <MenuItem value="AUDUSD">AUDUSD</MenuItem>
+            <MenuItem value="AUDUSD">AUDUSD</MenuItem>
             <MenuItem value="AUDJPY">AUDNZD</MenuItem>
-            <MenuItem value="AUDJPY">BTCUSD</MenuItem>
-            <MenuItem value="AUDCAD">CADJPY</MenuItem>
-            <MenuItem value="EURUSD">CHFJPY</MenuItem>
-            <MenuItem value="EURUSD">EURCAD</MenuItem>
+            <MenuItem value="AUDJPY">AUDJPY</MenuItem>
+            <MenuItem value="BTCUSD">BTCUSD</MenuItem>
+            <MenuItem value="CADJPY">CADJPY</MenuItem>
+            <MenuItem value="CHFJPY">CHFJPY</MenuItem>
+            <MenuItem value="EURCAD">EURCAD</MenuItem>
             <MenuItem value="EURUSD">EURUSD</MenuItem>
-            <MenuItem value="EURUSD">EURCHF</MenuItem>
-            <MenuItem value="EURUSD">EURNZD</MenuItem>
+            <MenuItem value="EURCHF">EURCHF</MenuItem>
+            <MenuItem value="EURNZD">EURNZD</MenuItem>
             <MenuItem value="EURJPY">EURJPY</MenuItem>
             <MenuItem value="EURCAD">EURCAD</MenuItem>
-            <MenuItem value="GBPCAD">GBPAUD</MenuItem>
+            <MenuItem value="GBPAUD">GBPAUD</MenuItem>
             <MenuItem value="GBPCAD">GBPCAD</MenuItem>
-            <MenuItem value="GBPCAD">GBPCHF</MenuItem>
+            <MenuItem value="GBPCHF">GBPCHF</MenuItem>
             <MenuItem value="GBPJPY">GBPJPY</MenuItem>
-            <MenuItem value="GBPUSD">GBPNZD</MenuItem>
+            <MenuItem value="GBPNZD">GBPNZD</MenuItem>
             <MenuItem value="GBPUSD">GBPUSD</MenuItem>
-            <MenuItem value="USDCAD">NZDCAD</MenuItem>
-            <MenuItem value="USDCAD">NZDJPY</MenuItem>
-            <MenuItem value="USDCAD">NZDUSD</MenuItem>
+            <MenuItem value="NZDCAD">NZDCAD</MenuItem>
+            <MenuItem value="NZDJPY">NZDJPY</MenuItem>
+            <MenuItem value="NZDUSD">NZDUSD</MenuItem>
             <MenuItem value="USDCAD">USDCAD</MenuItem>
-            <MenuItem value="USOIL">USDCHF</MenuItem>
-            <MenuItem value="USOIL">USDJPY</MenuItem>
+            <MenuItem value="USDCHF">USDCHF</MenuItem>
+            <MenuItem value="USDJPY">USDJPY</MenuItem>
             <MenuItem value="USOIL">USOIL</MenuItem>
+            <MenuItem value="XAGUSD">XAGUSD</MenuItem>
             <MenuItem value="XAUUSD">XAUUSD</MenuItem>
+
           </Select>
         </FormControl>
 

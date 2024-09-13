@@ -10,13 +10,12 @@ class TraderIdeaViewSet(viewsets.ModelViewSet):
     serializer_class = TraderIdeaSerializer
     permission_classes = [IsAuthenticated]
 
-    def create(self, request):
-        request.data['user'] = request.user.id
-
-        serializer = self.get_serializer(data=request.data)
+    def create(self, request, *args, **kwargs):
+        request.data._mutable = True  # Ensure data is mutable before modifying it
+        request.data['user'] = request.user.id  # Set the user ID
+        serializer = self.get_serializer(data=request.data)  # Remove 'files=request.FILES'
 
         if serializer.is_valid():
             self.perform_create(serializer)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

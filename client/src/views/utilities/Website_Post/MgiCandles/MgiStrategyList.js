@@ -18,9 +18,8 @@ import {
   IconButton
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { AddCircleOutline, Edit, Delete, Visibility } from '@mui/icons-material';
+import { AddCircleOutline, Edit, Delete } from '@mui/icons-material';
 import useAxios from '../../../../routes/useAxios';
-import MgiStrategyView from './MgiStrategyView';
 import MgiStrategyEditForm from './MgiStrategyEditForm';
 
 const MgiStrategyList = () => {
@@ -30,8 +29,6 @@ const MgiStrategyList = () => {
   const [selectedCandle, setSelectedCandle] = useState(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [candleToDelete, setCandleToDelete] = useState(null);
-  const [viewModalOpen, setViewModalOpen] = useState(false);
-  const [candleToView, setCandleToView] = useState(null);
 
   const fetchCandles = async () => {
     try {
@@ -44,7 +41,7 @@ const MgiStrategyList = () => {
 
   useEffect(() => {
     fetchCandles();
-  }, [api]);
+  }, []);
 
   const handleDelete = (id) => {
     setCandleToDelete(id);
@@ -70,16 +67,6 @@ const MgiStrategyList = () => {
   const handleCloseModal = () => {
     setSelectedCandle(null);
     setEditModalOpen(false);
-  };
-
-  const handleView = (candle) => {
-    setCandleToView(candle);
-    setViewModalOpen(true);
-  };
-
-  const handleCloseViewModal = () => {
-    setCandleToView(null);
-    setViewModalOpen(false);
   };
 
   return (
@@ -118,7 +105,7 @@ const MgiStrategyList = () => {
           <TableBody>
             {candles.map((candle, index) => (
               <TableRow key={candle.id}>
-                <TableCell>{index + 1 }</TableCell> 
+                <TableCell>{index + 1}</TableCell>
                 <TableCell>{candle.currency_pair}</TableCell>
                 <TableCell>{candle.trade_signal}</TableCell>
                 <TableCell>
@@ -129,12 +116,32 @@ const MgiStrategyList = () => {
                 <TableCell>{candle.candle_pattern}</TableCell>
                 <TableCell>{candle.fibonacci_level}</TableCell>
                 <TableCell>{candle.session}</TableCell>
-                <TableCell>{candle.flip_four_hour_candle}</TableCell>
-                <TableCell>{candle.four_hour_break_of_structure}</TableCell>
-                <TableCell>{candle.five_min_break_of_structure}</TableCell>
-                <TableCell>{candle.five_min_order_block}</TableCell>
-                <TableCell>{candle.change_color_ut_alert}</TableCell>
                 <TableCell>
+              <span style={{ color: candle.flip_four_hour_candle ? 'blue' : 'red' }}>
+                {candle.flip_four_hour_candle ? 'Yes' : 'No'}
+              </span>
+            </TableCell>
+            <TableCell>
+              <span style={{ color: candle.four_hour_break_of_structure ? 'blue' : 'red' }}>
+                {candle.four_hour_break_of_structure ? 'Yes' : 'No'}
+              </span>
+            </TableCell>
+            <TableCell>
+              <span style={{ color: candle.five_min_break_of_structure ? 'blue' : 'red' }}>
+                {candle.five_min_break_of_structure ? 'Yes' : 'No'}
+              </span>
+            </TableCell>
+            <TableCell>
+              <span style={{ color: candle.five_min_order_block ? 'blue' : 'red' }}>
+                {candle.five_min_order_block ? 'Yes' : 'No'}
+              </span>
+            </TableCell>
+            <TableCell>
+              <span style={{ color: candle.change_color_ut_alert ? 'blue' : 'red' }}>
+                {candle.change_color_ut_alert ? 'Yes' : 'No'}
+              </span>
+            </TableCell>
+              <TableCell>
                   <img src={candle.hour_candle} alt="Hour Candle" style={{ width: '100px', height: 'auto' }} />
                 </TableCell>
                 <TableCell>
@@ -146,9 +153,6 @@ const MgiStrategyList = () => {
                   </IconButton>
                   <IconButton color="secondary" onClick={() => handleDelete(candle.id)}>
                     <Delete />
-                  </IconButton>
-                  <IconButton color="default" onClick={() => handleView(candle)}>
-                    <Visibility />
                   </IconButton>
                 </TableCell>
               </TableRow>
@@ -163,13 +167,6 @@ const MgiStrategyList = () => {
         onClose={handleCloseModal}
         candleToEdit={selectedCandle}
         fetchCandles={fetchCandles}
-      />
-
-      {/* View Candle Modal */}
-      <MgiStrategyView
-        open={viewModalOpen}
-        onClose={handleCloseViewModal}
-        candleId={candleToView ? candleToView.id : null}
       />
 
       {/* Delete Confirmation Dialog */}

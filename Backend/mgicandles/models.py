@@ -11,6 +11,10 @@ class MgiCandles(models.Model):
     # Existing fields
     signal_candle = models.ImageField(upload_to='signal_candles/', null=True, blank=True)
     hour_candle = models.ImageField(upload_to='hour_candles/', null=True, blank=True)
+    two_hour_candle = models.ImageField(upload_to='two_hour_candles/', null=True, blank=True)
+    entry_candle = models.ImageField(upload_to='entry_candle/', null=True, blank=True)
+    breakeven_candle = models.ImageField(upload_to='breakeven_candle/', null=True, blank=True)
+    take_profit_candle = models.ImageField(upload_to='take_profit_candle/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     # New fields
