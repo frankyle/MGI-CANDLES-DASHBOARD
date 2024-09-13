@@ -4,7 +4,7 @@ import useAxios from '../../../../routes/useAxios';
 import TradersIdeasEditForm from './TradersIdeasEditForm'; // Import the edit form component
 
 function TradersIdeaList() {
-  const api = useAxios();
+  const api = useAxios();   
   const [traderIdeas, setTraderIdeas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [openImageModal, setOpenImageModal] = useState(false);

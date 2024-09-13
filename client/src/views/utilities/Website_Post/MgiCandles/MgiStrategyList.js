@@ -29,6 +29,8 @@ const MgiStrategyList = () => {
   const [selectedCandle, setSelectedCandle] = useState(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [candleToDelete, setCandleToDelete] = useState(null);
+  const [openImageModal, setOpenImageModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null); // Changed to handle a single image
 
   const fetchCandles = async () => {
     try {
@@ -69,6 +71,17 @@ const MgiStrategyList = () => {
     setEditModalOpen(false);
   };
 
+  // Handle opening the modal with the selected image
+  const handleOpenImageModal = (image) => {
+    setSelectedImage(image);
+    setOpenImageModal(true);
+  };
+
+  const handleCloseImageModal = () => {
+    setOpenImageModal(false);
+    setSelectedImage(null);
+  };
+
   return (
     <Box sx={{ m: 3 }}>
       <Typography variant="h4" sx={{ mb: 3 }}>MGI Candles</Typography>
@@ -96,7 +109,7 @@ const MgiStrategyList = () => {
               <TableCell>4hr Break of Structure</TableCell>
               <TableCell>5Min Break of Structure</TableCell>
               <TableCell>5Min Order Block</TableCell>
-              <TableCell>UT Alert (Change Color )</TableCell>
+              <TableCell>UT Alert (Change Color)</TableCell>
               <TableCell>2hr Candle</TableCell>
               <TableCell>Signal Candle</TableCell>
               <TableCell>Actions</TableCell>
@@ -117,35 +130,47 @@ const MgiStrategyList = () => {
                 <TableCell>{candle.fibonacci_level}</TableCell>
                 <TableCell>{candle.session}</TableCell>
                 <TableCell>
-              <span style={{ color: candle.flip_four_hour_candle ? 'blue' : 'red' }}>
-                {candle.flip_four_hour_candle ? 'Yes' : 'No'}
-              </span>
-            </TableCell>
-            <TableCell>
-              <span style={{ color: candle.four_hour_break_of_structure ? 'blue' : 'red' }}>
-                {candle.four_hour_break_of_structure ? 'Yes' : 'No'}
-              </span>
-            </TableCell>
-            <TableCell>
-              <span style={{ color: candle.five_min_break_of_structure ? 'blue' : 'red' }}>
-                {candle.five_min_break_of_structure ? 'Yes' : 'No'}
-              </span>
-            </TableCell>
-            <TableCell>
-              <span style={{ color: candle.five_min_order_block ? 'blue' : 'red' }}>
-                {candle.five_min_order_block ? 'Yes' : 'No'}
-              </span>
-            </TableCell>
-            <TableCell>
-              <span style={{ color: candle.change_color_ut_alert ? 'blue' : 'red' }}>
-                {candle.change_color_ut_alert ? 'Yes' : 'No'}
-              </span>
-            </TableCell>
-              <TableCell>
-                  <img src={candle.hour_candle} alt="Hour Candle" style={{ width: '100px', height: 'auto' }} />
+                  <span style={{ color: candle.flip_four_hour_candle ? 'blue' : 'red' }}>
+                    {candle.flip_four_hour_candle ? 'Yes' : 'No'}
+                  </span>
                 </TableCell>
                 <TableCell>
-                  <img src={candle.signal_candle} alt="Signal Candle" style={{ width: '100px', height: 'auto' }} />
+                  <span style={{ color: candle.four_hour_break_of_structure ? 'blue' : 'red' }}>
+                    {candle.four_hour_break_of_structure ? 'Yes' : 'No'}
+                  </span>
+                </TableCell>
+                <TableCell>
+                  <span style={{ color: candle.five_min_break_of_structure ? 'blue' : 'red' }}>
+                    {candle.five_min_break_of_structure ? 'Yes' : 'No'}
+                  </span>
+                </TableCell>
+                <TableCell>
+                  <span style={{ color: candle.five_min_order_block ? 'blue' : 'red' }}>
+                    {candle.five_min_order_block ? 'Yes' : 'No'}
+                  </span>
+                </TableCell>
+                <TableCell>
+                  <span style={{ color: candle.change_color_ut_alert ? 'blue' : 'red' }}>
+                    {candle.change_color_ut_alert ? 'Yes' : 'No'}
+                  </span>
+                </TableCell>
+                <TableCell onClick={() => handleOpenImageModal(candle.hour_candle)}>
+                  {candle.hour_candle && (
+                    <img
+                      src={candle.hour_candle}
+                      alt="Hour Candle"
+                      style={{ cursor: 'pointer', width: '150px', height: '100px' }}
+                    />
+                  )}
+                </TableCell>
+                <TableCell onClick={() => handleOpenImageModal(candle.signal_candle)}>
+                  {candle.signal_candle && (
+                    <img
+                      src={candle.signal_candle}
+                      alt="Signal Candle"
+                      style={{ cursor: 'pointer', width: '150px', height: '100px' }}
+                    />
+                  )}
                 </TableCell>
                 <TableCell>
                   <IconButton color="primary" onClick={() => handleEdit(candle)}>
@@ -160,6 +185,23 @@ const MgiStrategyList = () => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      {/* Single Image Modal */}
+      <Dialog open={openImageModal} onClose={handleCloseImageModal}>
+        <DialogTitle>Candle Image</DialogTitle>
+        <DialogContent>
+          {selectedImage && (
+            <img
+              src={selectedImage}
+              alt="Selected Candle"
+              style={{ width: '100%', height: 'auto' }}
+            />
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseImageModal}>Close</Button>
+        </DialogActions>
+      </Dialog>
 
       {/* Edit Candle Modal */}
       <MgiStrategyEditForm
