@@ -1,93 +1,45 @@
 import React from 'react';
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button, TextField, Grid, Typography, IconButton } from '@mui/material';
-import UploadFile from '@mui/icons-material/UploadFile';
+import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField } from '@mui/material';
 
-const EditTradingSignalModal = ({ open, handleClose, signal, handleInputChange, handleEditSubmit, handleImageChange }) => {
-  if (!signal) return null; // If no signal is provided, return nothing.
-
+const EditTradingSignalModal = ({ open, handleClose, signal, handleInputChange, handleImageChange, handleEditSubmit }) => {
   return (
-    <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+    <Dialog open={open} onClose={handleClose}>
       <DialogTitle>Edit Trading Signal</DialogTitle>
       <DialogContent>
-        <DialogContentText>Edit the selected trading signal.</DialogContentText>
         <TextField
           margin="dense"
           label="Currency Pair"
           name="currency_pair"
-          fullWidth
-          value={signal.currency_pair}
+          value={signal?.currency_pair || ''}
           onChange={handleInputChange}
+          fullWidth
         />
-
-        {/* Repeat structure for images */}
-        {['monday_image', 'tuesday_image', 'wednesday_image', 'thursday_image', 'friday_image'].map((day, index) => (
-          <Grid item xs={12} key={index} style={{ marginTop: '16px' }}>
-            <Typography variant="subtitle1" sx={{ mb: 2, mt: 2 }}>
-              {`${day.replace('_image', '').charAt(0).toUpperCase() + day.replace('_image', '').slice(1)} Image`}
-            </Typography>
-            {signal[day] && (
-              <img
-                src={URL.createObjectURL(signal[day])}
-                alt={`${day}`}
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  display: 'block',
-                  borderRadius: 4,
-                  border: '2px solid #ccc',
-                  objectFit: 'cover',
-                }}
-              />
-            )}
-            <input
-              accept="image/*"
-              style={{ display: 'none' }}
-              id={`${day}-input`}
-              type="file"
-              name={day}
-              onChange={handleImageChange}
-            />
-            <label htmlFor={`${day}-input`}>
-              <IconButton color="primary" aria-label={`upload ${day}`} component="span">
-                <UploadFile />
-              </IconButton>
-            </label>
-          </Grid>
-        ))}
-
-        {/* Pips Gained and Lost */}
-        <Grid container spacing={2} style={{ marginTop: '16px' }}>
-          <Grid item xs={6}>
-            <TextField
-              margin="dense"
-              label="Pips Gained"
-              type="number"
-              fullWidth
-              name="pips_gained"
-              value={signal.pips_gained}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              margin="dense"
-              label="Pips Lost"
-              type="number"
-              fullWidth
-              name="pips_lost"
-              value={signal.pips_lost}
-              onChange={handleInputChange}
-            />
-          </Grid>
-        </Grid>
+        <TextField
+          margin="dense"
+          label="Pips Gained"
+          name="pips_gained"
+          type="number"
+          value={signal?.pips_gained || ''}
+          onChange={handleInputChange}
+          fullWidth
+        />
+        <TextField
+          margin="dense"
+          label="Pips Lost"
+          name="pips_lost"
+          type="number"
+          value={signal?.pips_lost || ''}
+          onChange={handleInputChange}
+          fullWidth
+        />
+        {/* Image Upload Fields */}
+        <input type="file" name="signal_image" onChange={handleImageChange} />
+        <input type="file" name="monday_image" onChange={handleImageChange} />
+        {/* Add other days' image inputs similarly */}
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
-          Cancel
-        </Button>
-        <Button onClick={handleEditSubmit} color="primary">
-          Save
-        </Button>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={() => handleEditSubmit(signal)}>Save</Button>
       </DialogActions>
     </Dialog>
   );
