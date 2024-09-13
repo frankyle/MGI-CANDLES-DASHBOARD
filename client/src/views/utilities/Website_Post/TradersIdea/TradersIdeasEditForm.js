@@ -13,10 +13,14 @@ import {
   FormControl,
   Typography,
 } from '@mui/material';
+import { useSelector } from 'react-redux';
 import useAxios from '../../../../routes/useAxios';
+import ArrowUpward from '@mui/icons-material/ArrowUpward';
+import ArrowDownward from '@mui/icons-material/ArrowDownward';
 
 function TradersIdeasEditForm({ open, onClose, candleToEdit, fetchCandles }) {
   const api = useAxios();
+  const { user } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState({
     trade_signal: '',
     currency_pair: '',
@@ -24,6 +28,7 @@ function TradersIdeasEditForm({ open, onClose, candleToEdit, fetchCandles }) {
     publisher_trader: '',
     trader_platform: '',
     trader_idea: '', // Image URL
+    user: user ? parseInt(user.id) : '', 
   });
 
   const [imageFile, setImageFile] = useState(null);
@@ -37,10 +42,12 @@ function TradersIdeasEditForm({ open, onClose, candleToEdit, fetchCandles }) {
         publisher_trader: candleToEdit.publisher_trader || '',
         trader_platform: candleToEdit.trader_platform || '',
         trader_idea: candleToEdit.trader_idea || '',
+        user: user ? parseInt(user.id) : '', // Make sure user is set as an integer
       });
     }
-  }, [candleToEdit]);
+  }, [candleToEdit, user]);
 
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -55,45 +62,39 @@ function TradersIdeasEditForm({ open, onClose, candleToEdit, fetchCandles }) {
   };
 
   const handleSubmit = async () => {
-    // Create form data for image upload
     const formDataToSubmit = new FormData();
-    formDataToSubmit.append('trade_signal', formData.trade_signal);
-    formDataToSubmit.append('currency_pair', formData.currency_pair);
-    formDataToSubmit.append('post_date_time', formData.post_date_time);
-    formDataToSubmit.append('publisher_trader', formData.publisher_trader);
-    formDataToSubmit.append('trader_platform', formData.trader_platform);
-
+    formDataToSubmit.append('trade_signal', formData.trade_signal || candleToEdit.trade_signal);
+    formDataToSubmit.append('currency_pair', formData.currency_pair || candleToEdit.currency_pair);
+    formDataToSubmit.append('post_date_time', formData.post_date_time || candleToEdit.post_date_time);
+    formDataToSubmit.append('publisher_trader', formData.publisher_trader || candleToEdit.publisher_trader);
+    formDataToSubmit.append('trader_platform', formData.trader_platform || candleToEdit.trader_platform);
+  
+    // Ensure user ID is an integer
+    formDataToSubmit.append('user', parseInt(user.id, 10));
+  
     if (imageFile) {
-      formDataToSubmit.append('trader_idea', imageFile); // Include the new image file
+      formDataToSubmit.append('trader_idea', imageFile);
     }
-
+  
     try {
-      // Make the API call to update the data
       await api.put(`/newidea/traderideas/${candleToEdit.id}/`, formDataToSubmit, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-
-      fetchCandles(); // Refresh the list after edit
-      onClose(); // Close the modal after successful update
+  
+      fetchCandles();
+      onClose();
     } catch (error) {
       console.error('Error updating trader idea:', error);
     }
   };
-
+  
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
       <DialogTitle>Edit Trader Idea</DialogTitle>
       <DialogContent>
         <Box display="flex" flexDirection="column" gap={2}>
-          <TextField
-            label="Trade Signal"
-            name="trade_signal"
-            value={formData.trade_signal}
-            onChange={handleInputChange}
-            fullWidth
-          />
 
           <FormControl fullWidth>
             <InputLabel>Currency Pair</InputLabel>
@@ -103,26 +104,95 @@ function TradersIdeasEditForm({ open, onClose, candleToEdit, fetchCandles }) {
               onChange={handleInputChange}
             >
               <MenuItem value="AUDUSD">AUDUSD</MenuItem>
+              <MenuItem value="AUDJPY">AUDNZD</MenuItem>
+              <MenuItem value="AUDJPY">AUDJPY</MenuItem>
+              <MenuItem value="BTCUSD">BTCUSD</MenuItem>
+              <MenuItem value="CADJPY">CADJPY</MenuItem>
+              <MenuItem value="CHFJPY">CHFJPY</MenuItem>
+              <MenuItem value="EURCAD">EURCAD</MenuItem>
               <MenuItem value="EURUSD">EURUSD</MenuItem>
-              {/* Add more currency pairs here */}
+              <MenuItem value="EURCHF">EURCHF</MenuItem>
+              <MenuItem value="EURNZD">EURNZD</MenuItem>
+              <MenuItem value="EURJPY">EURJPY</MenuItem>
+              <MenuItem value="GBPAUD">GBPAUD</MenuItem>
+              <MenuItem value="GBPCAD">GBPCAD</MenuItem>
+              <MenuItem value="GBPCHF">GBPCHF</MenuItem>
+              <MenuItem value="GBPJPY">GBPJPY</MenuItem>
+              <MenuItem value="GBPNZD">GBPNZD</MenuItem>
+              <MenuItem value="GBPUSD">GBPUSD</MenuItem>
+              <MenuItem value="NZDCAD">NZDCAD</MenuItem>
+              <MenuItem value="NZDJPY">NZDJPY</MenuItem>
+              <MenuItem value="NZDUSD">NZDUSD</MenuItem>
+              <MenuItem value="USDCAD">USDCAD</MenuItem>
+              <MenuItem value="USDCHF">USDCHF</MenuItem>
+              <MenuItem value="USDJPY">USDJPY</MenuItem>
+              <MenuItem value="USOIL">USOIL</MenuItem>
+              <MenuItem value="XAGUSD">XAGUSD</MenuItem>
+              <MenuItem value="XAUUSD">XAUUSD</MenuItem>
+            </Select>
+          </FormControl>
+
+          <FormControl fullWidth sx={{ mt: 2 }}>
+            <InputLabel>Trade Signal</InputLabel>
+            <Select
+              name="trade_signal"
+              value={formData.trade_signal}
+              onChange={handleInputChange}
+            >
+              <MenuItem value="buy">
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <ArrowUpward color="primary" fontSize="small" />
+                  <Typography variant="body2" sx={{ ml: 1 }}>
+                    Buy
+                  </Typography>
+                </Box>
+              </MenuItem>
+              <MenuItem value="sell">
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <ArrowDownward color="error" fontSize="small" />
+                  <Typography variant="body2" sx={{ ml: 1 }}>
+                    Sell
+                  </Typography>
+                </Box>
+              </MenuItem>
             </Select>
           </FormControl>
 
           <TextField
-            label="Publisher Trader"
+            id="publisher-trader"
             name="publisher_trader"
+            select
+            label="Publisher Trader"
+            fullWidth
+            variant="outlined"
             value={formData.publisher_trader}
             onChange={handleInputChange}
-            fullWidth
-          />
+            margin="normal"
+          >
+            {['American Forecast', 'ForexWizard', 'FX_Elite_Club', 'Golden Engine', 'Gold Live-My strategy', 'Mjuni Fx', 'KhabiFx', 'Sir Drapo', 'SetupFx', 'StockSniper', 'TransparentFx'].map((platform) => (
+              <MenuItem key={platform} value={platform}>
+                {platform}
+              </MenuItem>
+            ))}
+          </TextField>
 
           <TextField
-            label="Trader Platform"
+            id="trader-platform"
             name="trader_platform"
+            select
+            label="Trader Platform"
+            fullWidth
+            variant="outlined"
             value={formData.trader_platform}
             onChange={handleInputChange}
-            fullWidth
-          />
+            margin="normal"
+          >
+            {['Trading View', 'YouTube', 'Whatsapp'].map((platform) => (
+              <MenuItem key={platform} value={platform}>
+                {platform}
+              </MenuItem>
+            ))}
+          </TextField>
 
           <Typography variant="body1">Current Image</Typography>
           {formData.trader_idea && (

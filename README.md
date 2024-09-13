@@ -21,3 +21,6 @@
 
 # Tutorial components
 ![alt text](image-7.png)
+
+# Paid page for signals
+![alt text](image-8.png)

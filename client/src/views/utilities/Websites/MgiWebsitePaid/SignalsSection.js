@@ -1,116 +1,89 @@
-import React from 'react';
-import { Typography, Grid } from '@mui/material';
-import Slider from 'react-slick';
-import CustomCard from './CustomCard';
-import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
-import './signalsSection.css'; // Add custom CSS styles
-import image1 from './../../../../assets/images/websites/hero/hero1.jpg'
-// Custom Arrows (Positioned beside the dots)
-const PreviousArrow = ({ onClick }) => (
-  <div className="custom-arrow custom-prev-arrow">
-    <ArrowBackIos onClick={onClick} style={{ cursor: 'pointer' }} />
-  </div>
-);
+import React from "react";
+import { Grid, Typography } from "@mui/material";
+import "./signalsSection.css";
+import image1 from "./../../../../assets/images/websites/hero/EURNZD_Output.JPG";
 
-const NextArrow = ({ onClick }) => (
-  <div className="custom-arrow custom-next-arrow">
-    <ArrowForwardIos onClick={onClick} style={{ cursor: 'pointer' }} />
-  </div>
-);
+const signalsData = [
+  {
+    title: "EUR/USD Signal",
+    position: "Short Position",
+    entry: "Entry: 1.1825 | TP: 1.1750",
+    views: "5.8K views • 3 days ago",
+    image: image1,
+  },
+  {
+    title: "GBP/USD Signal",
+    position: "Long Position",
+    entry: "Entry: 1.3920 | TP: 1.4000",
+    views: "7.4K views • 2 days ago",
+    image: image1,
+  },
+  {
+    title: "USD/JPY Signal",
+    position: "Short Position",
+    entry: "Entry: 110.75 | TP: 110.00",
+    views: "6.2K views • 1 day ago",
+    image: image1,
+  },
+  {
+    title: "AUD/USD Signal",
+    position: "Long Position",
+    entry: "Entry: 0.7250 | TP: 0.7300",
+    views: "8.1K views • 5 hours ago",
+    image: image1,
+  },
+  {
+    title: "EUR/GBP Signal",
+    position: "Short Position",
+    entry: "Entry: 0.8580 | TP: 0.8500",
+    views: "4.9K views • 1 day ago",
+    image: image1,
+  },
+  {
+    title: "USD/CAD Signal",
+    position: "Long Position",
+    entry: "Entry: 1.2580 | TP: 1.2650",
+    views: "3.7K views • 4 hours ago",
+    image: image1,
+  },
+  {
+    title: "NZD/USD Signal",
+    position: "Short Position",
+    entry: "Entry: 0.6800 | TP: 0.6750",
+    views: "4.0K views • 2 days ago",
+    image: image1,
+  },
+  {
+    title: "EUR/JPY Signal",
+    position: "Long Position",
+    entry: "Entry: 129.80 | TP: 130.50",
+    views: "3.5K views • 1 day ago",
+    image: image1,
+  },
+];
 
 const SignalsSection = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4, // Number of visible slides
-    slidesToScroll: 1,
-    nextArrow: <NextArrow />,
-    prevArrow: <PreviousArrow />,
-    responsive: [
-      {
-        breakpoint: 960,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-    appendDots: dots => (
-      <div>
-        <ul className="custom-dots"> {dots} </ul>
-      </div>
-    ),
-  };
-
   return (
     <div className="signals-section">
-       <Typography variant="h2" component="h1" gutterBottom align="center">
-         Daily Forex Entries
+      <Typography variant="h2" component="h1" align="center" gutterBottom className="section-title">
+        Daily Forex Entries
       </Typography>
-      <Slider {...settings}>
-        <Grid item>
-          <CustomCard
-            image= {image1} // Replace with actual image URL
-            title1="EUR/USD Signal"
-            title2="Short Position"
-            title3="Entry: 1.1825 | TP: 1.1750"
-            description="Forex Signals Provider - 5.8K views • 3 days ago"
-          />
-        </Grid>
-        <Grid item>
-          <CustomCard
-            image= {image1}
-            title1="GBP/USD Signal"
-            title2="Long Position"
-            title3="Entry: 1.3920 | TP: 1.4000"
-            description="Daily Pips Academy - 7.4K views • 2 days ago"
-          />
-        </Grid>
-        <Grid item>
-          <CustomCard
-            image={image1}
-            title1="USD/JPY Signal"
-            title2="Short Position"
-            title3="Entry: 110.75 | TP: 110.00"
-            description="Pro Forex Traders - 6.2K views • 1 day ago"
-          />
-        </Grid>
-        <Grid item>
-          <CustomCard
-            image={image1}
-            title1="AUD/USD Signal"
-            title2="Long Position"
-            title3="Entry: 0.7250 | TP: 0.7300"
-            description="Forex Masters - 8.1K views • 5 hours ago"
-          />
-        </Grid>
-        <Grid item>
-          <CustomCard
-            image={image1}
-            title1="EUR/GBP Signal"
-            title2="Short Position"
-            title3="Entry: 0.8580 | TP: 0.8500"
-            description="Pip Experts - 4.9K views • 1 day ago"
-          />
-        </Grid>
-        <Grid item>
-          <CustomCard
-            image={image1}
-            title1="USD/CAD Signal"
-            title2="Long Position"
-            title3="Entry: 1.2580 | TP: 1.2650"
-            description="FX Masters - 3.7K views • 4 hours ago"
-          />
-        </Grid>
-      </Slider>
+
+      <Grid container spacing={4} justifyContent="center">
+        {signalsData.map((signal, index) => (
+          <Grid item xs={12} sm={6} md={3} key={index}>
+            <div className="signal-card">
+              <img src={signal.image} alt={signal.title} className="signal-image" />
+              <div className="signal-info">
+                <Typography variant="h6" className="signal-title">{signal.title}</Typography>
+                <Typography>{signal.position}</Typography>
+                <Typography>{signal.entry}</Typography>
+                <Typography variant="body2" color="textSecondary">{signal.views}</Typography>
+              </div>
+            </div>
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 };
