@@ -19,7 +19,7 @@ class MgiCandlesAdmin(admin.ModelAdmin):
             'fields': ('trade_signal', 'is_active', 'currency_pair', 'session')
         }),
         ('Candles', {
-            'fields': ('signal_candle', 'hour_candle')
+            'fields': ('signal_candle', 'hour_candle', 'two_hour_candle', 'entry_candle', 'breakeven_candle', 'take_profit_candle')
         }),
         ('Additional Details', {
             'fields': ('five_min_order_block', 'flip_four_hour_candle', 'four_hour_break_of_structure', 'five_min_break_of_structure', 'change_color_ut_alert')

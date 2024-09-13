@@ -9,9 +9,6 @@ import Routes from 'routes';
 // defaultTheme
 import themes from 'themes';
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
 // project imports
 import NavigationScroll from 'layout/NavigationScroll';
 

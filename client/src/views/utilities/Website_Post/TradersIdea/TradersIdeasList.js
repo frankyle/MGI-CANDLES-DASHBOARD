@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, TextField, MenuItem } from '@mui/material';
 import useAxios from '../../../../routes/useAxios';
+import TradersIdeasEditForm from './TradersIdeasEditForm'; // Import the edit form component
 
 function TradersIdeaList() {
   const api = useAxios();
@@ -12,6 +13,10 @@ function TradersIdeaList() {
   const [selectedIdeaToEdit, setSelectedIdeaToEdit] = useState(null);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [selectedIdeaToDelete, setSelectedIdeaToDelete] = useState(null);
+  
+  // New state for filters
+  const [publisherFilter, setPublisherFilter] = useState('');
+  const [currencyPairFilter, setCurrencyPairFilter] = useState('');
 
   useEffect(() => {
     const fetchTraderIdeas = async () => {
@@ -37,18 +42,35 @@ function TradersIdeaList() {
 
   const handleCloseImageModal = () => {
     setOpenImageModal(false);
-    setSelectedImage(null); // Clear selected image on close
+    setSelectedImage(null);
   };
 
   const handleOpenEditModal = (idea) => {
-    setSelectedIdeaToEdit(idea);
-    setOpenEditModal(true);
+    setSelectedIdeaToEdit(idea); // Set the idea to edit
+    setOpenEditModal(true); // Open the modal
   };
 
-  const handleCloseEditModal = () => {
-    setOpenEditModal(false);
-    setSelectedIdeaToEdit(null); // Clear selected idea to edit on close
+
+  const fetchCandles = () => {
+    // Re-fetch the ideas after editing to refresh the list
+    const fetchTraderIdeas = async () => {
+      try {
+        const response = await api.get('/newidea/traderideas/');
+        setTraderIdeas(response.data);
+      } catch (error) {
+        console.error('Error fetching Trader Ideas:', error);
+      }
+    };
+    fetchTraderIdeas();
   };
+
+
+  
+  const handleCloseEditModal = () => {
+    setOpenEditModal(false); // Close the modal
+    setSelectedIdeaToEdit(null); // Clear the selected idea after closing
+  };
+
 
   const handleOpenDeleteModal = (idea) => {
     setSelectedIdeaToDelete(idea);
@@ -57,31 +79,89 @@ function TradersIdeaList() {
 
   const handleCloseDeleteModal = () => {
     setOpenDeleteModal(false);
-    setSelectedIdeaToDelete(null); // Clear selected idea to delete on close
+    setSelectedIdeaToDelete(null);
   };
 
   const handleEditIdea = async (idea) => {
-    // Implement your edit logic here, potentially using a modal or form to update the idea
     console.log('Editing idea:', idea);
-    // After successful editing, update the traderIdeas state and close the modal
     handleCloseEditModal();
   };
 
   const handleDeleteIdea = async (idea) => {
-    // Implement your delete logic here, using an API call to remove the idea
-    
-    console.log('Deleting idea:', idea);
-    // After successful deletion, remove the idea from the traderIdeas state and close the modal
-    const updatedTraderIdeas = traderIdeas.filter((i) => i.id !== idea.id);
-    setTraderIdeas(updatedTraderIdeas);
-    handleCloseDeleteModal();
+    try {
+      await api.delete(`/newidea/traderideas/${idea.id}/`);
+      setTraderIdeas(traderIdeas.filter((i) => i.id !== idea.id));
+      handleCloseDeleteModal();
+    } catch (error) {
+      console.error('Error deleting trader idea:', error);
+    }
   };
+
+  // Apply filters to the traderIdeas
+  const filteredTraderIdeas = traderIdeas.filter((idea) => {
+    return (
+      (publisherFilter === '' || idea.publisher_trader.toLowerCase().includes(publisherFilter.toLowerCase())) &&
+      (currencyPairFilter === '' || idea.currency_pair === currencyPairFilter)
+    );
+  });
 
   return (
     <Box sx={{ mt: 4 }}>
       <Typography variant="h4" component="h1" gutterBottom>
         Traders' Ideas
       </Typography>
+
+      {/* Filter Controls */}
+      <Box sx={{ mb: 2 }}>
+        <TextField
+          label="Filter by Publisher"
+          variant="outlined"
+          value={publisherFilter}
+          onChange={(e) => setPublisherFilter(e.target.value)}
+          sx={{ mr: 2, mb: 2 }}
+        />
+
+        <TextField
+          select
+          label="Filter by Currency Pair"
+          variant="outlined"
+          value={currencyPairFilter}
+          onChange={(e) => setCurrencyPairFilter(e.target.value)}
+          sx={{ mr: 2, mb: 2 }}
+        >
+          <MenuItem value="">All</MenuItem>
+          
+          <MenuItem value="AUDUSD">AUDUSD</MenuItem>
+            <MenuItem value="AUDJPY">AUDNZD</MenuItem>
+            <MenuItem value="AUDJPY">AUDJPY</MenuItem>
+            <MenuItem value="BTCUSD">BTCUSD</MenuItem>
+            <MenuItem value="CADJPY">CADJPY</MenuItem>
+            <MenuItem value="CHFJPY">CHFJPY</MenuItem>
+            <MenuItem value="EURCAD">EURCAD</MenuItem>
+            <MenuItem value="EURUSD">EURUSD</MenuItem>
+            <MenuItem value="EURCHF">EURCHF</MenuItem>
+            <MenuItem value="EURNZD">EURNZD</MenuItem>
+            <MenuItem value="EURJPY">EURJPY</MenuItem>
+            <MenuItem value="EURCAD">EURCAD</MenuItem>
+            <MenuItem value="GBPAUD">GBPAUD</MenuItem>
+            <MenuItem value="GBPCAD">GBPCAD</MenuItem>
+            <MenuItem value="GBPCHF">GBPCHF</MenuItem>
+            <MenuItem value="GBPJPY">GBPJPY</MenuItem>
+            <MenuItem value="GBPNZD">GBPNZD</MenuItem>
+            <MenuItem value="GBPUSD">GBPUSD</MenuItem>
+            <MenuItem value="NZDCAD">NZDCAD</MenuItem>
+            <MenuItem value="NZDJPY">NZDJPY</MenuItem>
+            <MenuItem value="NZDUSD">NZDUSD</MenuItem>
+            <MenuItem value="USDCAD">USDCAD</MenuItem>
+            <MenuItem value="USDCHF">USDCHF</MenuItem>
+            <MenuItem value="USDJPY">USDJPY</MenuItem>
+            <MenuItem value="USOIL">USOIL</MenuItem>
+            <MenuItem value="XAGUSD">XAGUSD</MenuItem>
+            <MenuItem value="XAUUSD">XAUUSD</MenuItem>
+
+           {/* Add more currency pairs as needed */}
+        </TextField>
+      </Box>
 
       {loading ? (
         <Typography>Loading...</Typography>
@@ -90,7 +170,7 @@ function TradersIdeaList() {
           <Table>
             <TableHead>
               <TableRow>
-              <TableCell>No.</TableCell>
+                <TableCell>No.</TableCell>
                 <TableCell>Image (Click to View)</TableCell>
                 <TableCell>Trade Signal</TableCell>
                 <TableCell>Currency Pair</TableCell>
@@ -101,9 +181,9 @@ function TradersIdeaList() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {traderIdeas.map((idea, index) => (
+              {filteredTraderIdeas.map((idea, index) => (
                 <TableRow key={idea.id}>
-                  <TableCell>{index + 1}</TableCell> 
+                  <TableCell>{index + 1}</TableCell>
                   <TableCell onClick={() => handleOpenImageModal(idea)}>
                     {idea.trader_idea && (
                       <img
@@ -119,7 +199,11 @@ function TradersIdeaList() {
                   <TableCell>{idea.publisher_trader}</TableCell>
                   <TableCell>{idea.trader_platform}</TableCell>
                   <TableCell>
-                    <Button variant="contained" color="primary" onClick={() => handleOpenEditModal(idea)}>
+                  <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => handleOpenEditModal(idea)} // Open edit modal with idea data
+                    >
                       Edit
                     </Button>
                     <Button variant="contained" color="error" onClick={() => handleOpenDeleteModal(idea)}>
@@ -150,17 +234,15 @@ function TradersIdeaList() {
         </DialogActions>
       </Dialog>
 
-      {/* Edit Modal */}
-      <Dialog open={openEditModal} onClose={handleCloseEditModal}>
-        <DialogTitle>Edit Trader Idea</DialogTitle>
-        <DialogContent>
-          {/* Implement your edit form here */}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseEditModal}>Cancel</Button>
-          <Button onClick={() => handleEditIdea(selectedIdeaToEdit)}>Save</Button>
-        </DialogActions>
-      </Dialog>
+        {/* Render the TradersIdeasEditForm component */}
+        {selectedIdeaToEdit && (
+        <TradersIdeasEditForm
+          open={openEditModal} // Control modal open/close state
+          onClose={handleCloseEditModal} // Handle closing the modal
+          candleToEdit={selectedIdeaToEdit} // Pass the selected idea to the form
+          fetchCandles={fetchCandles} // Refresh the data after editing
+        />
+      )}
 
       {/* Delete Modal */}
       <Dialog open={openDeleteModal} onClose={handleCloseDeleteModal}>

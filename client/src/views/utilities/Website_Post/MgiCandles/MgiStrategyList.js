@@ -105,7 +105,7 @@ const MgiStrategyList = () => {
           <TableBody>
             {candles.map((candle, index) => (
               <TableRow key={candle.id}>
-                <TableCell>{index + 1}</TableCell> 
+                <TableCell>{index + 1}</TableCell>
                 <TableCell>{candle.currency_pair}</TableCell>
                 <TableCell>{candle.trade_signal}</TableCell>
                 <TableCell>
@@ -116,12 +116,32 @@ const MgiStrategyList = () => {
                 <TableCell>{candle.candle_pattern}</TableCell>
                 <TableCell>{candle.fibonacci_level}</TableCell>
                 <TableCell>{candle.session}</TableCell>
-                <TableCell>{candle.flip_four_hour_candle}</TableCell>
-                <TableCell>{candle.four_hour_break_of_structure}</TableCell>
-                <TableCell>{candle.five_min_break_of_structure}</TableCell>
-                <TableCell>{candle.five_min_order_block}</TableCell>
-                <TableCell>{candle.change_color_ut_alert}</TableCell>
                 <TableCell>
+              <span style={{ color: candle.flip_four_hour_candle ? 'blue' : 'red' }}>
+                {candle.flip_four_hour_candle ? 'Yes' : 'No'}
+              </span>
+            </TableCell>
+            <TableCell>
+              <span style={{ color: candle.four_hour_break_of_structure ? 'blue' : 'red' }}>
+                {candle.four_hour_break_of_structure ? 'Yes' : 'No'}
+              </span>
+            </TableCell>
+            <TableCell>
+              <span style={{ color: candle.five_min_break_of_structure ? 'blue' : 'red' }}>
+                {candle.five_min_break_of_structure ? 'Yes' : 'No'}
+              </span>
+            </TableCell>
+            <TableCell>
+              <span style={{ color: candle.five_min_order_block ? 'blue' : 'red' }}>
+                {candle.five_min_order_block ? 'Yes' : 'No'}
+              </span>
+            </TableCell>
+            <TableCell>
+              <span style={{ color: candle.change_color_ut_alert ? 'blue' : 'red' }}>
+                {candle.change_color_ut_alert ? 'Yes' : 'No'}
+              </span>
+            </TableCell>
+              <TableCell>
                   <img src={candle.hour_candle} alt="Hour Candle" style={{ width: '100px', height: 'auto' }} />
                 </TableCell>
                 <TableCell>

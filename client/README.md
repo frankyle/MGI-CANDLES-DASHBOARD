@@ -40,3 +40,15 @@
 
 # Navigation with Scroll effect
 ![alt text](image-14.png)
+
+# View the Traders Ideas List and can delete
+![alt text](image-15.png)
+
+# View the Traders Ideas Image in a modal
+![alt text](image-16.png)
+
+# View MGI Candles idea and we can edit and delete
+![alt text](image-17.png)
+
+# Track Each currency 
+![alt text](image-18.png)

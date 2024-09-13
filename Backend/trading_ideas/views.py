@@ -11,8 +11,9 @@ class TraderIdeaViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
-        request.data['user'] = request.user.id
-        serializer = self.get_serializer(data=request.data, files=request.FILES)
+        request.data._mutable = True  # Ensure data is mutable before modifying it
+        request.data['user'] = request.user.id  # Set the user ID
+        serializer = self.get_serializer(data=request.data)  # Remove 'files=request.FILES'
 
         if serializer.is_valid():
             self.perform_create(serializer)

@@ -31,7 +31,7 @@ const MgiStrategy = () => {
   const { user } = useSelector((state) => state.auth);
   const [message, setMessage] = useState('');
   const [signalCandle, setSignalCandle] = useState(null);
-  const [hourCandle, setHourCandle] = useState(null);
+  const [hourCandle, setHourCandle] = useState(null)
   const [signalCandleUrl, setSignalCandleUrl] = useState(null);
   const [hourCandleUrl, setHourCandleUrl] = useState(null);
   const [tradeSignal, setTradeSignal] = useState('');
@@ -167,10 +167,9 @@ const MgiStrategy = () => {
         <FormControl fullWidth sx={{ mt: 2 }}>
           <InputLabel>Currency Pair</InputLabel>
           <Select value={currencyPair} onChange={(e) => setCurrencyPair(e.target.value)}>
-          <MenuItem value="AUDUSD">AUDUSD</MenuItem>
+            <MenuItem value="AUDUSD">AUDUSD</MenuItem>
+            <MenuItem value="AUDJPY">AUDNZD</MenuItem>
             <MenuItem value="AUDJPY">AUDJPY</MenuItem>
-            <MenuItem value="AUDCAD">AUDCAD</MenuItem>
-            <MenuItem value="AUDNZD">AUDNZD</MenuItem>
             <MenuItem value="BTCUSD">BTCUSD</MenuItem>
             <MenuItem value="CADJPY">CADJPY</MenuItem>
             <MenuItem value="CHFJPY">CHFJPY</MenuItem>
@@ -193,7 +192,9 @@ const MgiStrategy = () => {
             <MenuItem value="USDCHF">USDCHF</MenuItem>
             <MenuItem value="USDJPY">USDJPY</MenuItem>
             <MenuItem value="USOIL">USOIL</MenuItem>
+            <MenuItem value="XAGUSD">XAGUSD</MenuItem>
             <MenuItem value="XAUUSD">XAUUSD</MenuItem>
+
           </Select>
         </FormControl>
 

@@ -111,28 +111,30 @@ function TradersIdea() {
           <Select value={currencyPair} onChange={(e) => setCurrencyPair(e.target.value)}>
             <MenuItem value="AUDUSD">AUDUSD</MenuItem>
             <MenuItem value="AUDJPY">AUDNZD</MenuItem>
-            <MenuItem value="AUDJPY">BTCUSD</MenuItem>
-            <MenuItem value="AUDCAD">CADJPY</MenuItem>
-            <MenuItem value="EURUSD">CHFJPY</MenuItem>
-            <MenuItem value="EURUSD">EURCAD</MenuItem>
+            <MenuItem value="AUDJPY">AUDJPY</MenuItem>
+            <MenuItem value="BTCUSD">BTCUSD</MenuItem>
+            <MenuItem value="CADJPY">CADJPY</MenuItem>
+            <MenuItem value="CHFJPY">CHFJPY</MenuItem>
+            <MenuItem value="EURCAD">EURCAD</MenuItem>
             <MenuItem value="EURUSD">EURUSD</MenuItem>
-            <MenuItem value="EURUSD">EURCHF</MenuItem>
-            <MenuItem value="EURUSD">EURNZD</MenuItem>
+            <MenuItem value="EURCHF">EURCHF</MenuItem>
+            <MenuItem value="EURNZD">EURNZD</MenuItem>
             <MenuItem value="EURJPY">EURJPY</MenuItem>
             <MenuItem value="EURCAD">EURCAD</MenuItem>
-            <MenuItem value="GBPCAD">GBPAUD</MenuItem>
+            <MenuItem value="GBPAUD">GBPAUD</MenuItem>
             <MenuItem value="GBPCAD">GBPCAD</MenuItem>
-            <MenuItem value="GBPCAD">GBPCHF</MenuItem>
+            <MenuItem value="GBPCHF">GBPCHF</MenuItem>
             <MenuItem value="GBPJPY">GBPJPY</MenuItem>
-            <MenuItem value="GBPUSD">GBPNZD</MenuItem>
+            <MenuItem value="GBPNZD">GBPNZD</MenuItem>
             <MenuItem value="GBPUSD">GBPUSD</MenuItem>
-            <MenuItem value="USDCAD">NZDCAD</MenuItem>
-            <MenuItem value="USDCAD">NZDJPY</MenuItem>
-            <MenuItem value="USDCAD">NZDUSD</MenuItem>
+            <MenuItem value="NZDCAD">NZDCAD</MenuItem>
+            <MenuItem value="NZDJPY">NZDJPY</MenuItem>
+            <MenuItem value="NZDUSD">NZDUSD</MenuItem>
             <MenuItem value="USDCAD">USDCAD</MenuItem>
-            <MenuItem value="USOIL">USDCHF</MenuItem>
-            <MenuItem value="USOIL">USDJPY</MenuItem>
+            <MenuItem value="USDCHF">USDCHF</MenuItem>
+            <MenuItem value="USDJPY">USDJPY</MenuItem>
             <MenuItem value="USOIL">USOIL</MenuItem>
+            <MenuItem value="XAGUSD">XAGUSD</MenuItem>
             <MenuItem value="XAUUSD">XAUUSD</MenuItem>
 
           </Select>
@@ -214,7 +216,7 @@ function TradersIdea() {
           onChange={(e) => setPublisherTrader(e.target.value)}
           margin="normal"
         >
-          {['American Forecast', 'BecomingTraderFx', 'Forex Trading Stategy', 'ForexWizard', 'FX_Elite_Club', 'Golden Engine', 'Gold Live-My strategy', 'Holy Profit', 'Illiya Sivkov', 'KhabiFx', 'Miko Aodu', 'SetupFx', 'StockSniper', 'TransparentFx'].map((platform) => (
+          {['American Forecast', 'ForexWizard', 'FX_Elite_Club', 'Golden Engine', 'Gold Live-My strategy', 'Mjuni Fx', 'KhabiFx', 'Sir Drapo', 'SetupFx', 'StockSniper', 'TransparentFx'].map((platform) => (
             <MenuItem key={platform} value={platform}>
               {platform}
             </MenuItem>
@@ -231,7 +233,7 @@ function TradersIdea() {
           onChange={(e) => setTraderPlatform(e.target.value)}
           margin="normal"
         >
-          {['Trading View', 'YouTube'].map((platform) => (
+          {['Trading View', 'YouTube', 'Whatsapp' ].map((platform) => (
             <MenuItem key={platform} value={platform}>
               {platform}
             </MenuItem>

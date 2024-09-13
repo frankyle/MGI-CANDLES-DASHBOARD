@@ -43,37 +43,57 @@ const TradingTracker = () => {
     }));
   };
 
-  // Handle submit of new trading signal
-  const handleAddSignal = async () => {
-    const formData = new FormData();
+ // Handle submit of new trading signal
+const handleAddSignal = async () => {
+  const formData = new FormData();
 
-     // Add each field to FormData
-    for (const key in newSignal) {
-      formData.append(key, newSignal[key]);
-    }
+  // Add each non-file field to FormData
+  formData.append('currency_pair', newSignal.currency_pair);
+  formData.append('pips_gained', newSignal.pips_gained);
+  formData.append('pips_lost', newSignal.pips_lost);
 
-    try {
-      await api.post('/tracker/tradetracker/', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data', // Important for file uploads
-        },
-      });
-      setAddModalOpen(false);
-      setNewSignal({
-        currency_pair: '',
-        signal_image: null,
-        monday_image: null,
-        tuesday_image: null,
-        wednesday_image: null,
-        thursday_image: null,
-        friday_image: null,
-        pips_gained: 0,
-        pips_lost: 0,
-      });
-    } catch (error) {
-      console.error('Error adding trading Tracker:', error);
-    }
-  };
+  // Conditionally append file fields (only if they exist)
+  if (newSignal.signal_image) {
+    formData.append('signal_image', newSignal.signal_image);
+  }
+  if (newSignal.monday_image) {
+    formData.append('monday_image', newSignal.monday_image);
+  }
+  if (newSignal.tuesday_image) {
+    formData.append('tuesday_image', newSignal.tuesday_image);
+  }
+  if (newSignal.wednesday_image) {
+    formData.append('wednesday_image', newSignal.wednesday_image);
+  }
+  if (newSignal.thursday_image) {
+    formData.append('thursday_image', newSignal.thursday_image);
+  }
+  if (newSignal.friday_image) {
+    formData.append('friday_image', newSignal.friday_image);
+  }
+
+  try {
+    await api.post('/tracker/tradetracker/', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data', // Important for file uploads
+      },
+    });
+    setAddModalOpen(false);
+    setNewSignal({
+      currency_pair: '',
+      signal_image: null,
+      monday_image: null,
+      tuesday_image: null,
+      wednesday_image: null,
+      thursday_image: null,
+      friday_image: null,
+      pips_gained: 0,
+      pips_lost: 0,
+    });
+  } catch (error) {
+    console.error('Error adding trading Tracker:', error);
+  }
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -111,13 +131,33 @@ const TradingTracker = () => {
                 value={newSignal.currency_pair}
                 onChange={handleChange}
               >
-                <MenuItem value="AUDUSD">AUDUSD</MenuItem>
-                <MenuItem value="BTCUSD">BTCUSD</MenuItem>
-                <MenuItem value="CADJPY">CADJPY</MenuItem>
-                <MenuItem value="EURUSD">EURUSD</MenuItem>
-                <MenuItem value="GBPUSD">GBPUSD</MenuItem>
-                <MenuItem value="XAUUSD">XAUUSD</MenuItem>
-              </Select>
+                    <MenuItem value="AUDUSD">AUDUSD</MenuItem>
+            <MenuItem value="AUDJPY">AUDNZD</MenuItem>
+            <MenuItem value="AUDJPY">AUDJPY</MenuItem>
+            <MenuItem value="BTCUSD">BTCUSD</MenuItem>
+            <MenuItem value="CADJPY">CADJPY</MenuItem>
+            <MenuItem value="CHFJPY">CHFJPY</MenuItem>
+            <MenuItem value="EURCAD">EURCAD</MenuItem>
+            <MenuItem value="EURUSD">EURUSD</MenuItem>
+            <MenuItem value="EURCHF">EURCHF</MenuItem>
+            <MenuItem value="EURNZD">EURNZD</MenuItem>
+            <MenuItem value="EURJPY">EURJPY</MenuItem>
+            <MenuItem value="EURCAD">EURCAD</MenuItem>
+            <MenuItem value="GBPAUD">GBPAUD</MenuItem>
+            <MenuItem value="GBPCAD">GBPCAD</MenuItem>
+            <MenuItem value="GBPCHF">GBPCHF</MenuItem>
+            <MenuItem value="GBPJPY">GBPJPY</MenuItem>
+            <MenuItem value="GBPNZD">GBPNZD</MenuItem>
+            <MenuItem value="GBPUSD">GBPUSD</MenuItem>
+            <MenuItem value="NZDCAD">NZDCAD</MenuItem>
+            <MenuItem value="NZDJPY">NZDJPY</MenuItem>
+            <MenuItem value="NZDUSD">NZDUSD</MenuItem>
+            <MenuItem value="USDCAD">USDCAD</MenuItem>
+            <MenuItem value="USDCHF">USDCHF</MenuItem>
+            <MenuItem value="USDJPY">USDJPY</MenuItem>
+            <MenuItem value="USOIL">USOIL</MenuItem>
+            <MenuItem value="XAGUSD">XAGUSD</MenuItem>
+            <MenuItem value="XAUUSD">XAUUSD</MenuItem>  </Select>
             </Grid>
 
             {/* Signal Image Upload */}
