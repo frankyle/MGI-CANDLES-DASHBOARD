@@ -110,8 +110,12 @@ const MgiStrategyList = () => {
               <TableCell>5Min Break of Structure</TableCell>
               <TableCell>5Min Order Block</TableCell>
               <TableCell>UT Alert (Change Color)</TableCell>
-              <TableCell>2hr Candle</TableCell>
               <TableCell>Signal Candle</TableCell>
+              <TableCell>2hr Hour Candle</TableCell>      
+              <TableCell>1hr Candle</TableCell>
+              <TableCell>Entry Candle</TableCell>         
+              <TableCell>Breakeven Candle</TableCell>     
+              <TableCell>Take Profit Candle</TableCell>   
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -154,15 +158,6 @@ const MgiStrategyList = () => {
                     {candle.change_color_ut_alert ? 'Yes' : 'No'}
                   </span>
                 </TableCell>
-                <TableCell onClick={() => handleOpenImageModal(candle.hour_candle)}>
-                  {candle.hour_candle && (
-                    <img
-                      src={candle.hour_candle}
-                      alt="Hour Candle"
-                      style={{ cursor: 'pointer', width: '150px', height: '100px' }}
-                    />
-                  )}
-                </TableCell>
                 <TableCell onClick={() => handleOpenImageModal(candle.signal_candle)}>
                   {candle.signal_candle && (
                     <img
@@ -172,6 +167,56 @@ const MgiStrategyList = () => {
                     />
                   )}
                 </TableCell>
+
+                <TableCell onClick={() => handleOpenImageModal(candle.two_hour_candle)}>
+                  {candle.two_hour_candle && (
+                    <img
+                      src={candle.two_hour_candle}
+                      alt="Two Hour Candle"
+                      style={{ cursor: 'pointer', width: '150px', height: '100px' }}
+                    />
+                  )}
+                </TableCell>
+                
+                <TableCell onClick={() => handleOpenImageModal(candle.hour_candle)}>
+                  {candle.hour_candle && (
+                    <img
+                      src={candle.hour_candle}
+                      alt="Hour Candle"
+                      style={{ cursor: 'pointer', width: '150px', height: '100px' }}
+                    />
+                  )}
+                </TableCell>
+                
+                
+                <TableCell onClick={() => handleOpenImageModal(candle.entry_candle)}>
+                  {candle.entry_candle && (
+                    <img
+                      src={candle.entry_candle}
+                      alt="Entry Candle"
+                      style={{ cursor: 'pointer', width: '150px', height: '100px' }}
+                    />
+                  )}
+                </TableCell>
+                <TableCell onClick={() => handleOpenImageModal(candle.breakeven_candle)}>
+                  {candle.breakeven_candle && (
+                    <img
+                      src={candle.breakeven_candle}
+                      alt="Breakeven Candle"
+                      style={{ cursor: 'pointer', width: '150px', height: '100px' }}
+                    />
+                  )}
+                </TableCell>
+                <TableCell onClick={() => handleOpenImageModal(candle.take_profit_candle)}>
+                  {candle.take_profit_candle && (
+                    <img
+                      src={candle.take_profit_candle}
+                      alt="Take Profit Candle"
+                      style={{ cursor: 'pointer', width: '150px', height: '100px' }}
+                    />
+                  )}
+                </TableCell>
+
                 <TableCell>
                   <IconButton color="primary" onClick={() => handleEdit(candle)}>
                     <Edit />
