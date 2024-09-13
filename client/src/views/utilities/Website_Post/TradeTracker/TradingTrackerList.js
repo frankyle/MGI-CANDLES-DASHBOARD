@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, CircularProgress, Typography, IconButton } from '@mui/material';
 import { Edit, Delete } from '@mui/icons-material';
 import useAxios from '../../../../routes/useAxios';
-import EditTradingSignalModal from './EditTradingSignalModal'; // Import the updated component
+import EditTradingSignalModal from './EditTradingSignalModal';
+import ImageModal from './ImageModal';
 
 const TradingTrackerList = () => {
   const api = useAxios(); // Axios instance
@@ -11,6 +12,8 @@ const TradingTrackerList = () => {
   const [error, setError] = useState(null); // State to handle errors
   const [editSignal, setEditSignal] = useState(null); // State for currently editing signal
   const [openEditModal, setOpenEditModal] = useState(false); // State for opening the edit modal
+  const [selectedImage, setSelectedImage] = useState(null); // State for selected image
+  const [openImageModal, setOpenImageModal] = useState(false); // State for image modal
 
   // Fetch signals from the backend
   useEffect(() => {
@@ -44,36 +47,9 @@ const TradingTrackerList = () => {
     }
   };
 
-  const handleEditSubmit = async () => {
-    const formData = new FormData();
-    formData.append('currency_pair', editSignal.currency_pair);
-    formData.append('pips_gained', editSignal.pips_gained);
-    formData.append('pips_lost', editSignal.pips_lost);
-    if (editSignal.signal_image) formData.append('signal_image', editSignal.signal_image);
-    if (editSignal.monday_image) formData.append('monday_image', editSignal.monday_image);
-    // Repeat for other images (Tuesday to Friday)
-
-    try {
-      await api.put(`/tracker/tradetracker/${editSignal.id}/`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      setSignals(signals.map((signal) => (signal.id === editSignal.id ? editSignal : signal)));
-      setOpenEditModal(false); // Close modal after successful edit
-    } catch (err) {
-      console.error('Error updating signal:', err);
-      setError('Failed to update trading signal');
-    }
-  };
-
-  const handleInputChange = (e) => {
-    setEditSignal({ ...editSignal, [e.target.name]: e.target.value });
-  };
-
-  const handleImageChange = (e) => {
-    const { name, files } = e.target;
-    setEditSignal({ ...editSignal, [name]: files[0] }); // Update the image file
+  const handleImageClick = (imageUrl) => {
+    setSelectedImage(imageUrl); // Set the clicked image
+    setOpenImageModal(true); // Open image modal
   };
 
   if (loading) {
@@ -109,22 +85,52 @@ const TradingTrackerList = () => {
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{signal.currency_pair}</TableCell>
                 <TableCell>
-                  <img src={signal.signal_image} alt="Signal" style={{ width: '50px', height: 'auto' }} />
+                  <img 
+                    src={signal.signal_image} 
+                    alt="Signal" 
+                    style={{ width: '50px', height: 'auto', cursor: 'pointer' }} 
+                    onClick={() => handleImageClick(signal.signal_image)} // Open modal on click
+                  />
                 </TableCell>
                 <TableCell>
-                  <img src={signal.monday_image} alt="Monday" style={{ width: '50px', height: 'auto' }} />
+                  <img 
+                    src={signal.monday_image} 
+                    alt="Monday" 
+                    style={{ width: '50px', height: 'auto', cursor: 'pointer' }} 
+                    onClick={() => handleImageClick(signal.monday_image)} 
+                  />
                 </TableCell>
                 <TableCell>
-                  <img src={signal.tuesday_image} alt="Tuesday" style={{ width: '50px', height: 'auto' }} />
+                  <img 
+                    src={signal.tuesday_image} 
+                    alt="Tuesday" 
+                    style={{ width: '50px', height: 'auto', cursor: 'pointer' }} 
+                    onClick={() => handleImageClick(signal.tuesday_image)} 
+                  />
                 </TableCell>
                 <TableCell>
-                  <img src={signal.wednesday_image} alt="Wednesday" style={{ width: '50px', height: 'auto' }} />
+                  <img 
+                    src={signal.wednesday_image} 
+                    alt="Wednesday" 
+                    style={{ width: '50px', height: 'auto', cursor: 'pointer' }} 
+                    onClick={() => handleImageClick(signal.wednesday_image)} 
+                  />
                 </TableCell>
                 <TableCell>
-                  <img src={signal.thursday_image} alt="Thursday" style={{ width: '50px', height: 'auto' }} />
+                  <img 
+                    src={signal.thursday_image} 
+                    alt="Thursday" 
+                    style={{ width: '50px', height: 'auto', cursor: 'pointer' }} 
+                    onClick={() => handleImageClick(signal.thursday_image)} 
+                  />
                 </TableCell>
                 <TableCell>
-                  <img src={signal.friday_image} alt="Friday" style={{ width: '50px', height: 'auto' }} />
+                  <img 
+                    src={signal.friday_image} 
+                    alt="Friday" 
+                    style={{ width: '50px', height: 'auto', cursor: 'pointer' }} 
+                    onClick={() => handleImageClick(signal.friday_image)} 
+                  />
                 </TableCell>
                 <TableCell>{signal.pips_gained}</TableCell>
                 <TableCell>{signal.pips_lost}</TableCell>
@@ -147,9 +153,16 @@ const TradingTrackerList = () => {
         open={openEditModal}
         handleClose={() => setOpenEditModal(false)}
         signal={editSignal}
-        handleInputChange={handleInputChange}
-        handleImageChange={handleImageChange}
-        handleEditSubmit={handleEditSubmit}
+        handleInputChange={(e) => setEditSignal({ ...editSignal, [e.target.name]: e.target.value })}
+        handleImageChange={(e) => setEditSignal({ ...editSignal, [e.target.name]: e.target.files[0] })}
+        handleEditSubmit={() => {/* Add submission logic */}}
+      />
+
+      {/* Image Modal */}
+      <ImageModal
+        open={openImageModal}
+        handleClose={() => setOpenImageModal(false)}
+        imageUrl={selectedImage}
       />
     </>
   );
