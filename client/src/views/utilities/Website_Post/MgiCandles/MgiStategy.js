@@ -494,7 +494,7 @@ const MgiStrategy = () => {
           onChange={(event) => setCandlePattern(event.target.value)}
           margin="normal"
         >
-          {['engulfing', 'small', 'pinbar'].map((pattern) => (
+          {['Engulfing', 'Small Body', 'Pinbar'].map((pattern) => (
             <MenuItem key={pattern} value={pattern}>
               {pattern.charAt(0).toUpperCase() + pattern.slice(1) + ' Candle'}
             </MenuItem>
@@ -529,7 +529,7 @@ const MgiStrategy = () => {
           onChange={(event) => setSession(event.target.value)}
           margin="normal"
         >
-          {['london', 'newyork'].map((session) => (
+          {['London', 'Newyork'].map((session) => (
             <MenuItem key={session} value={session}>
               {session.charAt(0).toUpperCase() + session.slice(1)} Session
             </MenuItem>

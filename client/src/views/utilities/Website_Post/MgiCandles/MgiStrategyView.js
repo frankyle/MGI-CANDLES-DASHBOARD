@@ -2,9 +2,7 @@ import React from 'react'
 
 const MgiStrategyView = () => {
   return (
-    <div>
-      View
-    </div>
+    <div>MgiStrategyView</div>
   )
 }
 

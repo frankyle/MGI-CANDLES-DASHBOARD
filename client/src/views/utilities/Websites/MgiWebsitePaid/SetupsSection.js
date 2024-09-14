@@ -1,72 +1,142 @@
-import React, { useEffect, useState } from "react";
-import { Grid, Typography } from "@mui/material";
-import useAxios from '../../../../routes/useAxios'; // Your custom Axios hook
-import "./signalsSection.css";
+import React, { useEffect, useState } from 'react';
+import {
+  Box,
+  Typography,
+  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Button,
+} from '@mui/material';
+import useAxios from '../../../../routes/useAxios';
 
 const SetupsSection = () => {
-  const [signalsData, setSignalsData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  
-  const api = useAxios(); // Initialize the custom Axios instance
+  const api = useAxios();
+  const [candles, setCandles] = useState([]);
+  const [openImageModal, setOpenImageModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  // Fetch data from the database using Axios
+  const fetchCandles = async () => {
+    try {
+      const response = await api.get('/mgi/mgicandles/');
+      setCandles(response.data);
+    } catch (error) {
+      console.error('Error fetching MGI candles:', error);
+    }
+  };
+
   useEffect(() => {
-    const fetchSignalsData = async () => {
-      try {
-        const response = await api.get('/mgi/mgicandles/'); // Fetch data from your custom endpoint
-        setSignalsData(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching signals data:", error);
-        setError("Error fetching signals data");
-        setLoading(false);
-      }
-    };
+    fetchCandles();
+  }, []);
 
-    fetchSignalsData();
-  }, [api]);
+  const handleOpenImageModal = (image) => {
+    setSelectedImage(image);
+    setOpenImageModal(true);
+  };
 
-  if (loading) {
-    return <Typography variant="h6" align="center">Loading...</Typography>;
-  }
-
-  if (error) {
-    return <Typography variant="h6" align="center">{error}</Typography>;
-  }
+  const handleCloseImageModal = () => {
+    setOpenImageModal(false);
+    setSelectedImage(null);
+  };
 
   return (
-    <div className="signals-section">
-      <Typography
-        variant="h2"
-        component="h1"
-        align="center"
-        gutterBottom
-        className="section-title"
-      >
-        Weekly Setups
+    <Box sx={{ m: 3 }}>
+      <Typography variant="h2" component="h1" align="center" gutterBottom className="section-title">
+        Daily Forex Entries
       </Typography>
+      <Grid container spacing={3}>
+        {candles
+          .filter((candle) => candle.signal_candle) // Only include candles that have an image
+          .sort((a, b) => b.id - a.id) // Sort by ID in descending order (latest first)
+          .slice(0, 6) // Get only the latest 6 candles
+          .map((candle) => (
+          <Grid item xs={12} sm={6} md={4} key={candle.id}>
+            <Card>
+              <CardMedia
+                component="img"
+                height="200"
+                image={candle.signal_candle}
+                alt="Entry Candle"
+                onClick={() => handleOpenImageModal(candle.signal_candle)}
+                sx={{ cursor: 'pointer' }}
+              />
+              <CardContent>
+                {/* Trade Signal */}
+                <Typography variant="body1">
+                  <strong>Trade Signal:</strong>{' '}
+                  <span
+                    style={{
+                      color: candle.trade_signal.toUpperCase() === 'BUY' ? 'blue' : 'red',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {candle.trade_signal.toUpperCase()}
+                  </span>
+                </Typography>
 
-      <Grid container spacing={4} justifyContent="center">
-        {signalsData.map((signal, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
-            <div className="signal-card">
-              <img src={signal.image} alt={signal.title} className="signal-image" />
-              <div className="signal-info">
-                <Typography variant="h6" className="signal-title">
-                  {signal.title}
+                {/* Status */}
+                <Typography variant="body1">
+                  <strong>Status:</strong>{' '}
+                  <span
+                    style={{
+                      color: candle.is_active ? 'blue' : 'red',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {candle.is_active ? 'Active' : 'Inactive'}
+                  </span>
                 </Typography>
-                <Typography>{signal.position}</Typography>
-                <Typography>{signal.entry}</Typography>
-                <Typography variant="body2" color="textSecondary">
-                  {signal.views}
+
+            
+                {/* 4hr Flip Candle */}
+                <Typography variant="body1">
+                  <strong>4hr Flip Candle:</strong>{' '}
+                  <span
+                    style={{
+                      color: candle.flip_four_hour_candle ? 'blue' : 'red',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {candle.flip_four_hour_candle ? 'Yes' : 'No'}
+                  </span>
                 </Typography>
-              </div>
-            </div>
+
+                {/* 4hr Break of Structure */}
+                <Typography variant="body1">
+                  <strong>4hr Break of Structure:</strong>{' '}
+                  <span
+                    style={{
+                      color: candle.four_hour_break_of_structure ? 'blue' : 'red',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {candle.four_hour_break_of_structure ? 'Yes' : 'No'}
+                  </span>
+                </Typography>
+              </CardContent>
+            </Card>
           </Grid>
         ))}
       </Grid>
-    </div>
+
+      {/* Full Image Modal */}
+      <Dialog open={openImageModal} onClose={handleCloseImageModal}>
+        <DialogTitle>Full Candle Image</DialogTitle>
+        <DialogContent>
+          {selectedImage && (
+            <img
+              src={selectedImage}
+              alt="Full Candle"
+              style={{ width: '100%', height: 'auto' }}
+            />
+          )}
+        </DialogContent>
+        <Button onClick={handleCloseImageModal} sx={{ m: 2 }}>Close</Button>
+      </Dialog>
+    </Box>
   );
 };
 

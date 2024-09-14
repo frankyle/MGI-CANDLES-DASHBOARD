@@ -52,3 +52,6 @@
 
 # Track Each currency 
 ![alt text](image-18.png)
+
+# Frontend view added signals and weekly setups
+![alt text](image-19.png)

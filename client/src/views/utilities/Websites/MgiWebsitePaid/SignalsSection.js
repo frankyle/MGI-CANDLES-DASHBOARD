@@ -1,90 +1,168 @@
-import React from "react";
-import { Grid, Typography } from "@mui/material";
-import "./signalsSection.css";
-import image1 from "./../../../../assets/images/websites/hero/EURNZD_Output.JPG";
-
-const signalsData = [
-  {
-    title: "EUR/USD Signal",
-    position: "Short Position",
-    entry: "Entry: 1.1825 | TP: 1.1750",
-    views: "5.8K views • 3 days ago",
-    image: image1,
-  },
-  {
-    title: "GBP/USD Signal",
-    position: "Long Position",
-    entry: "Entry: 1.3920 | TP: 1.4000",
-    views: "7.4K views • 2 days ago",
-    image: image1,
-  },
-  {
-    title: "USD/JPY Signal",
-    position: "Short Position",
-    entry: "Entry: 110.75 | TP: 110.00",
-    views: "6.2K views • 1 day ago",
-    image: image1,
-  },
-  {
-    title: "AUD/USD Signal",
-    position: "Long Position",
-    entry: "Entry: 0.7250 | TP: 0.7300",
-    views: "8.1K views • 5 hours ago",
-    image: image1,
-  },
-  {
-    title: "EUR/GBP Signal",
-    position: "Short Position",
-    entry: "Entry: 0.8580 | TP: 0.8500",
-    views: "4.9K views • 1 day ago",
-    image: image1,
-  },
-  {
-    title: "USD/CAD Signal",
-    position: "Long Position",
-    entry: "Entry: 1.2580 | TP: 1.2650",
-    views: "3.7K views • 4 hours ago",
-    image: image1,
-  },
-  {
-    title: "NZD/USD Signal",
-    position: "Short Position",
-    entry: "Entry: 0.6800 | TP: 0.6750",
-    views: "4.0K views • 2 days ago",
-    image: image1,
-  },
-  {
-    title: "EUR/JPY Signal",
-    position: "Long Position",
-    entry: "Entry: 129.80 | TP: 130.50",
-    views: "3.5K views • 1 day ago",
-    image: image1,
-  },
-];
+import React, { useEffect, useState } from 'react';
+import {
+  Box,
+  Typography,
+  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Button,
+} from '@mui/material';
+import useAxios from '../../../../routes/useAxios';
 
 const SignalsSection = () => {
+  const api = useAxios();
+  const [candles, setCandles] = useState([]);
+  const [openImageModal, setOpenImageModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const fetchCandles = async () => {
+    try {
+      const response = await api.get('/mgi/mgicandles/');
+      setCandles(response.data);
+    } catch (error) {
+      console.error('Error fetching MGI candles:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCandles();
+  }, []);
+
+  const handleOpenImageModal = (image) => {
+    setSelectedImage(image);
+    setOpenImageModal(true);
+  };
+
+  const handleCloseImageModal = () => {
+    setOpenImageModal(false);
+    setSelectedImage(null);
+  };
+
   return (
-    <div className="signals-section">
+    <Box sx={{ m: 3 }}>
       <Typography variant="h2" component="h1" align="center" gutterBottom className="section-title">
         Daily Forex Entries
       </Typography>
+      <Grid container spacing={3}>
+        {candles
+          .filter((candle) => candle.entry_candle) // Only include candles that have an image
+          .sort((a, b) => b.id - a.id) // Sort by ID in descending order (latest first)
+          .slice(0, 6) // Get only the latest 6 candles
+          .map((candle) => (
+          <Grid item xs={12} sm={6} md={4} key={candle.id}>
+            <Card>
+              <CardMedia
+                component="img"
+                height="200"
+                image={candle.entry_candle}
+                alt="Entry Candle"
+                onClick={() => handleOpenImageModal(candle.entry_candle)}
+                sx={{ cursor: 'pointer' }}
+              />
+              <CardContent>
+                {/* Trade Signal */}
+                <Typography variant="body1">
+                  <strong>Trade Signal:</strong>{' '}
+                  <span
+                    style={{
+                      color: candle.trade_signal.toUpperCase() === 'BUY' ? 'blue' : 'red',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {candle.trade_signal.toUpperCase()}
+                  </span>
+                </Typography>
 
-      <Grid container spacing={4} justifyContent="center">
-        {signalsData.map((signal, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
-            <div className="signal-card">
-              <img src={signal.image} alt={signal.title} className="signal-image" />
-              <div className="signal-info">
-                <Typography variant="h6" className="signal-title">{signal.title}</Typography>
-                <Typography>{signal.position}</Typography>
-                <Typography>{signal.entry}</Typography>
-                <Typography variant="body2" color="textSecondary">{signal.views}</Typography>
-              </div>
-            </div>
+                {/* Status */}
+                <Typography variant="body1">
+                  <strong>Status:</strong>{' '}
+                  <span
+                    style={{
+                      color: candle.is_active ? 'blue' : 'red',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {candle.is_active ? 'Active' : 'Inactive'}
+                  </span>
+                </Typography>
+
+               
+                {/* 4hr Flip Candle */}
+                <Typography variant="body1">
+                  <strong>4hr Flip Candle:</strong>{' '}
+                  <span
+                    style={{
+                      color: candle.flip_four_hour_candle ? 'blue' : 'red',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {candle.flip_four_hour_candle ? 'Yes' : 'No'}
+                  </span>
+                </Typography>
+
+                {/* 4hr Break of Structure */}
+                <Typography variant="body1">
+                  <strong>4hr Break of Structure:</strong>{' '}
+                  <span
+                    style={{
+                      color: candle.four_hour_break_of_structure ? 'blue' : 'red',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {candle.four_hour_break_of_structure ? 'Yes' : 'No'}
+                  </span>
+                </Typography>
+                
+                {/* Session */}
+                <Typography variant="body1">
+                  <strong>Session:</strong>{' '}
+                  <span
+                    style={{
+                      color: candle.session.toLowerCase() === 'london' ? 'blue' : candle.session.toLowerCase() === 'newyork' ? 'orange' : 'black',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {candle.session}
+                  </span>
+                </Typography>
+
+
+                 {/* Candle Pattern */}
+                 <Typography variant="body1">
+                  <strong>Candle Pattern:</strong> {candle.candle_pattern}
+                </Typography>
+
+                {/* Fibonacci Level */}
+                <Typography variant="body1">
+                  <strong>Fibonacci Level:</strong> {candle.fibonacci_level}
+                </Typography>
+
+                
+              </CardContent>
+            </Card>
           </Grid>
         ))}
       </Grid>
-    </div>
+
+      {/* Full Image Modal */}
+      <Dialog open={openImageModal} onClose={handleCloseImageModal}>
+        <DialogTitle>Full Candle Image</DialogTitle>
+        <DialogContent>
+          {selectedImage && (
+            <img
+              src={selectedImage}
+              alt="Full Candle"
+              style={{ width: '100%', height: 'auto' }}
+            />
+          )}
+        </DialogContent>
+        <Button onClick={handleCloseImageModal} sx={{ m: 2 }}>Close</Button>
+      </Dialog>
+    </Box>
   );
 };
 
