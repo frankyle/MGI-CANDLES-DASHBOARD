@@ -31,6 +31,7 @@ import Eur_Jpy from 'views/utilities/Website_Post/Currencies/Individual/Eur_Jpy'
 import Eur_Aud from 'views/utilities/Website_Post/Currencies/Individual/Eur_Aud';
 import Gbp_Chf from 'views/utilities/Website_Post/Currencies/Individual/Gbp_Chf';
 import Gbp_Nzd from 'views/utilities/Website_Post/Currencies/Individual/Gbp_Nzd';
+import MgiStrategyView from 'views/utilities/Website_Post/MgiCandles/MgiStrategyView';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
@@ -63,11 +64,12 @@ const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
-  path: '/',
+  
+  path: '/mtego/',
   element: <MainLayout />,
   children: [
     {
-      path: '/',
+      path: '/mtego/',
       element: <DashboardDefault />
     },
     {
@@ -129,6 +131,10 @@ const MainRoutes = {
     {
       path: 'mgistrategy-list',
       element: <MgiStrategyList />
+    },
+    {
+      path: 'mgistrategy/view/:id', // <-- Add the new route here
+      element: <MgiStrategyView />   // <-- Component to view a single candle
     },
     {
       path: 'trade-tracker',

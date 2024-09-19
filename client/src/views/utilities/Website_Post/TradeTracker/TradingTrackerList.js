@@ -59,7 +59,6 @@ const TradingTrackerList = () => {
   if (error) {
     return <Typography variant="h6" color="error">{error}</Typography>;
   }
-  
 
   return (
     <>

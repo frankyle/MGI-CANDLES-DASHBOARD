@@ -22,7 +22,7 @@ const WebsitesRoutes = {
   element: <WebLayout />,
   children: [
     {
-      path: '/mgiwebsitefree',
+      path: '/',
       element: <MgiWebsiteFree />
     },
     {

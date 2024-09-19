@@ -26,7 +26,7 @@ const utilities = {
           id: 'tradersideas',
           title: 'Traders Ideas',
           type: 'item',
-          url: '/tradersideas',
+          url: '/mtego/tradersideas',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -34,7 +34,7 @@ const utilities = {
           id: 'tradersideas-list',
           title: 'Traders Ideas List',
           type: 'item',
-          url: '/tradersideas-list',
+          url: '/mtego/tradersideas-list',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -42,7 +42,7 @@ const utilities = {
           id: 'mgistrategy',
           title: 'Mgi Strategy',
           type: 'item',
-          url: '/mgistrategy',
+          url: '/mtego/mgistrategy',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -50,7 +50,7 @@ const utilities = {
           id: 'mgistrategy-list',
           title: 'Mgi Strategy List',
           type: 'item',
-          url: '/mgistrategy-list',
+          url: '/mtego/mgistrategy-list',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -58,7 +58,7 @@ const utilities = {
           id: 'trade-tracker',
           title: 'Trade Tracker',
           type: 'item',
-          url: '/trade-tracker',
+          url: '/mtego/trade-tracker',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -75,7 +75,7 @@ const utilities = {
           id: 'audusd',
           title: 'AUD USD',
           type: 'item',
-          url: '/audusd',
+          url: '/mtego/audusd',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -83,7 +83,7 @@ const utilities = {
           id: 'audnzd',
           title: 'AUD NZD',
           type: 'item',
-          url: '/audnzd',
+          url: '/mtego/audnzd',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -91,7 +91,7 @@ const utilities = {
           id: 'btcusd',
           title: 'BTC USD',
           type: 'item',
-          url: '/btcusd',
+          url: '/mtego/btcusd',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -99,7 +99,7 @@ const utilities = {
           id: 'cadjpy',
           title: 'CAD JPY',
           type: 'item',
-          url: '/cadjpy',
+          url: '/mtego/cadjpy',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -107,7 +107,7 @@ const utilities = {
           id: 'chfjpy',
           title: 'CHF JPY',
           type: 'item',
-          url: '/chfjpy',
+          url: '/mtego/chfjpy',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -115,7 +115,7 @@ const utilities = {
           id: 'eurcad',
           title: 'EUR CAD',
           type: 'item',
-          url: '/eurcad',
+          url: '/mtego/eurcad',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -123,7 +123,7 @@ const utilities = {
           id: 'eurchf',
           title: 'EUR CHF',
           type: 'item',
-          url: '/eurchf',
+          url: '/mtego/eurchf',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -131,7 +131,7 @@ const utilities = {
           id: 'eurnzd',
           title: 'EUR NZD',
           type: 'item',
-          url: '/eurnzd',
+          url: '/mtego/eurnzd',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -139,7 +139,7 @@ const utilities = {
           id: 'eurusd',
           title: 'EUR USD',
           type: 'item',
-          url: '/eurusd',
+          url: '/mtego/eurusd',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -147,7 +147,7 @@ const utilities = {
           id: 'euraud',
           title: 'EUR AUD',
           type: 'item',
-          url: '/euraud',
+          url: '/mtego/euraud',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -155,7 +155,7 @@ const utilities = {
           id: 'eurjpy',
           title: 'EUR JPY',
           type: 'item',
-          url: '/eurjpy',
+          url: '/mtego/eurjpy',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -163,7 +163,7 @@ const utilities = {
           id: 'gbpcad',
           title: 'GBP CAD',
           type: 'item',
-          url: '/gbpcad',
+          url: '/mtego/gbpcad',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -171,7 +171,7 @@ const utilities = {
           id: 'gbpchf',
           title: 'GBP CHF',
           type: 'item',
-          url: '/gbpchf',
+          url: '/mtego/gbpchf',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -179,7 +179,7 @@ const utilities = {
           id: 'gbpjpy',
           title: 'GBP JPY',
           type: 'item',
-          url: '/gbpjpy',
+          url: '/mtego/gbpjpy',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -187,7 +187,7 @@ const utilities = {
           id: 'gbpnzd',
           title: 'GBP NZD',
           type: 'item',
-          url: '/gbpnzd',
+          url: '/mtego/gbpnzd',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -195,7 +195,7 @@ const utilities = {
           id: 'gbpusd',
           title: 'GBP USD',
           type: 'item',
-          url: '/gbpusd',
+          url: '/mtego/gbpusd',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -205,7 +205,7 @@ const utilities = {
           id: 'nzdcad',
           title: 'NZD CAD',
           type: 'item',
-          url: '/nzdcad',
+          url: '/mtego/nzdcad',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -213,7 +213,7 @@ const utilities = {
           id: 'nzdjpy',
           title: 'NZD JPY',
           type: 'item',
-          url: '/nzdjpy',
+          url: '/mtego/nzdjpy',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -221,7 +221,7 @@ const utilities = {
           id: 'nzdusd',
           title: 'NZD USD',
           type: 'item',
-          url: '/nzdusd',
+          url: '/mtego/nzdusd',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -230,7 +230,7 @@ const utilities = {
           id: 'usdcad',
           title: 'USD CAD',
           type: 'item',
-          url: '/usdcad',
+          url: '/mtego/usdcad',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -238,7 +238,7 @@ const utilities = {
           id: 'usdchf',
           title: 'USD CHF',
           type: 'item',
-          url: '/usdchf',
+          url: '/mtego/usdchf',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -246,7 +246,7 @@ const utilities = {
           id: 'usdjpy',
           title: 'USD JPY',
           type: 'item',
-          url: '/usdjpy',
+          url: '/mtego/usdjpy',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -254,7 +254,7 @@ const utilities = {
           id: 'usdoil',
           title: 'USD OIL',
           type: 'item',
-          url: '/usdoil',
+          url: '/mtego/usdoil',
           icon: icons.IconPalette,
           breadcrumbs: false
         },
@@ -263,7 +263,7 @@ const utilities = {
           id: 'xauusd',
           title: 'XAU USD',
           type: 'item',
-          url: '/xauusd',
+          url: '/mtego/xauusd',
           icon: icons.IconPalette,
           breadcrumbs: false
         }
@@ -330,54 +330,54 @@ const utilities = {
 
     //   ]
     // },
-    {
-      id: 'util-typography',
-      title: 'Typography',
-      type: 'item',
-      url: '/utils/util-typography',
-      icon: icons.IconTypography,
-      breadcrumbs: false
-    },
-    {
-      id: 'util-color',
-      title: 'Color',
-      type: 'item',
-      url: '/utils/util-color',
-      icon: icons.IconPalette,
-      breadcrumbs: false
-    },
-    {
-      id: 'util-shadow',
-      title: 'Shadow',
-      type: 'item',
-      url: '/utils/util-shadow',
-      icon: icons.IconShadow,
-      breadcrumbs: false
-    },
-    {
-      id: 'icons',
-      title: 'Icons',
-      type: 'collapse',
-      icon: icons.IconWindmill,
-      children: [
-        {
-          id: 'tabler-icons',
-          title: 'Tabler Icons',
-          type: 'item',
-          url: '/icons/tabler-icons',
-          breadcrumbs: false
-        },
-        {
-          id: 'material-icons',
-          title: 'Material Icons',
-          type: 'item',
-          external: true,
-          target: '_blank',
-          url: 'https://mui.com/material-ui/material-icons/',
-          breadcrumbs: false
-        }
-      ]
-    }
+    // {
+    //   id: 'util-typography',
+    //   title: 'Typography',
+    //   type: 'item',
+    //   url: '/utils/util-typography',
+    //   icon: icons.IconTypography,
+    //   breadcrumbs: false
+    // },
+    // {
+    //   id: 'util-color',
+    //   title: 'Color',
+    //   type: 'item',
+    //   url: '/utils/util-color',
+    //   icon: icons.IconPalette,
+    //   breadcrumbs: false
+    // },
+    // {
+    //   id: 'util-shadow',
+    //   title: 'Shadow',
+    //   type: 'item',
+    //   url: '/utils/util-shadow',
+    //   icon: icons.IconShadow,
+    //   breadcrumbs: false
+    // },
+    // {
+    //   id: 'icons',
+    //   title: 'Icons',
+    //   type: 'collapse',
+    //   icon: icons.IconWindmill,
+    //   children: [
+    //     {
+    //       id: 'tabler-icons',
+    //       title: 'Tabler Icons',
+    //       type: 'item',
+    //       url: '/icons/tabler-icons',
+    //       breadcrumbs: false
+    //     },
+    //     {
+    //       id: 'material-icons',
+    //       title: 'Material Icons',
+    //       type: 'item',
+    //       external: true,
+    //       target: '_blank',
+    //       url: 'https://mui.com/material-ui/material-icons/',
+    //       breadcrumbs: false
+    //     }
+    //   ]
+    // }
   ]
 };
 

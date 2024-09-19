@@ -18,7 +18,7 @@ import {
   IconButton
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { AddCircleOutline, Edit, Delete } from '@mui/icons-material';
+import { AddCircleOutline, Edit, Delete , ArrowUpward, ArrowDownward } from '@mui/icons-material';
 import useAxios from '../../../../routes/useAxios';
 import MgiStrategyEditForm from './MgiStrategyEditForm';
 
@@ -31,6 +31,7 @@ const MgiStrategyList = () => {
   const [candleToDelete, setCandleToDelete] = useState(null);
   const [openImageModal, setOpenImageModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null); // Changed to handle a single image
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
 
   const fetchCandles = async () => {
     try {
@@ -82,6 +83,31 @@ const MgiStrategyList = () => {
     setSelectedImage(null);
   };
 
+    // Sorting function
+    const handleSort = (key) => {
+      let direction = 'asc';
+      if (sortConfig.key === key && sortConfig.direction === 'asc') {
+        direction = 'desc';
+      }
+      setSortConfig({ key, direction });
+    };
+  
+    const sortedCandles = [...candles].sort((a, b) => {
+      if (sortConfig.key) {
+        const valueA = a[sortConfig.key];
+        const valueB = b[sortConfig.key];
+        if (valueA < valueB) {
+          return sortConfig.direction === 'asc' ? -1 : 1;
+        }
+        if (valueA > valueB) {
+          return sortConfig.direction === 'asc' ? 1 : -1;
+        }
+        return 0;
+      }
+      return candles;
+    });
+  
+
   return (
     <Box sx={{ m: 3 }}>
       <Typography variant="h4" sx={{ mb: 3 }}>MGI Candles</Typography>
@@ -90,7 +116,7 @@ const MgiStrategyList = () => {
         color="primary"
         startIcon={<AddCircleOutline />}
         component={Link}
-        to="/mgistrategy"
+        to="/mtego/mgistrategy"
       >
         Create New Candle
       </Button>
@@ -99,9 +125,19 @@ const MgiStrategyList = () => {
           <TableHead>
             <TableRow>
               <TableCell>#</TableCell>
-              <TableCell>Currency Pair</TableCell>
+              <TableCell>
+                Currency Pair
+                <IconButton onClick={() => handleSort('currency_pair')}>
+                  {sortConfig.key === 'currency_pair' && sortConfig.direction === 'asc' ? <ArrowUpward /> : <ArrowDownward />}
+                </IconButton>
+              </TableCell>
               <TableCell>Trade Signal</TableCell>
-              <TableCell>Status</TableCell>
+              <TableCell>
+                Status
+                <IconButton onClick={() => handleSort('is_active')}>
+                  {sortConfig.key === 'is_active' && sortConfig.direction === 'asc' ? <ArrowUpward /> : <ArrowDownward />}
+                </IconButton>
+              </TableCell>
               <TableCell>Candle Pattern</TableCell>
               <TableCell>Fibonacci Level</TableCell>
               <TableCell>Session</TableCell>

@@ -72,7 +72,7 @@ const FirebaseLogin = ({ ...others }) => {
       const resultAction = await dispatch(loginUser({ email, password }));
       if (loginUser.fulfilled.match(resultAction)) {
         if (scriptedRef.current) {
-          navigate('/dashboard/default');
+          navigate('/');
         }
       } else {
         if (scriptedRef.current) {

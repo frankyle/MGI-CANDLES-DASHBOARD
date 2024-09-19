@@ -244,12 +244,14 @@ const MgiStrategy = () => {
         <FormControl fullWidth sx={{ mt: 2 }}>
           <InputLabel>Currency Pair</InputLabel>
           <Select value={currencyPair} onChange={(e) => setCurrencyPair(e.target.value)}>
+            <MenuItem value="AUDUSD">AUDCAD</MenuItem>
             <MenuItem value="AUDUSD">AUDUSD</MenuItem>
             <MenuItem value="AUDJPY">AUDNZD</MenuItem>
             <MenuItem value="AUDJPY">AUDJPY</MenuItem>
             <MenuItem value="BTCUSD">BTCUSD</MenuItem>
             <MenuItem value="CADJPY">CADJPY</MenuItem>
             <MenuItem value="CHFJPY">CHFJPY</MenuItem>
+            <MenuItem value="EURAUD">EURAUD</MenuItem>
             <MenuItem value="EURCAD">EURCAD</MenuItem>
             <MenuItem value="EURUSD">EURUSD</MenuItem>
             <MenuItem value="EURCHF">EURCHF</MenuItem>
@@ -271,6 +273,8 @@ const MgiStrategy = () => {
             <MenuItem value="USOIL">USOIL</MenuItem>
             <MenuItem value="XAGUSD">XAGUSD</MenuItem>
             <MenuItem value="XAUUSD">XAUUSD</MenuItem>
+            <MenuItem value="JUMP75">JUMP75</MenuItem>
+            <MenuItem value="Vix10">Vix10</MenuItem>
 
           </Select>
         </FormControl>
@@ -494,7 +498,7 @@ const MgiStrategy = () => {
           onChange={(event) => setCandlePattern(event.target.value)}
           margin="normal"
         >
-          {['engulfing', 'small', 'pinbar'].map((pattern) => (
+          {['Engulfing', 'Small Body', 'Pinbar'].map((pattern) => (
             <MenuItem key={pattern} value={pattern}>
               {pattern.charAt(0).toUpperCase() + pattern.slice(1) + ' Candle'}
             </MenuItem>
@@ -529,7 +533,7 @@ const MgiStrategy = () => {
           onChange={(event) => setSession(event.target.value)}
           margin="normal"
         >
-          {['london', 'newyork'].map((session) => (
+          {['London', 'Newyork'].map((session) => (
             <MenuItem key={session} value={session}>
               {session.charAt(0).toUpperCase() + session.slice(1)} Session
             </MenuItem>

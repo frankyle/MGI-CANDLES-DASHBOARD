@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
 
 const NavigationComponent = () => {
 
@@ -16,15 +18,29 @@ const NavigationComponent = () => {
             });
         }
     };
+
+
+    const navigate = useNavigate();
+
+    const handleNavigate = () => {
+        navigate('/mgiwebsitepaid');
+      };
+
+      const handleNavigateToDashboard = () => {
+        navigate('/mtego');
+      };
+
+      const handleNavigateToHome = () => {
+        navigate('/');
+      };
+    
+
     return (
         <div>
-            <Button 
-                color="inherit" 
-                sx={{ marginRight: 2 }}
-                onClick={() => handleScroll('hero-section')}
-            >
+            <Button color="inherit" onClick={handleNavigateToHome}>
                 Home
             </Button>
+
             <Button 
                 color="inherit" 
                 sx={{ marginRight: 2 }}
@@ -59,6 +75,12 @@ const NavigationComponent = () => {
                 onClick={() => handleScroll('contact-us')}
             >
                 Contact Us
+            </Button>
+            <Button color="inherit" onClick={handleNavigate}>
+                Premium Page
+            </Button>
+            <Button color="inherit" onClick={handleNavigateToDashboard}>
+                Dashboard
             </Button>
         </div>
     );

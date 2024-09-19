@@ -21,9 +21,9 @@ class MgiCandles(models.Model):
     candle_pattern = models.CharField(
         max_length=20,
         choices=(
-            ("engulfing", "Engulfing Candle"), 
-            ("small", "Small Candle"),
-            ("pinbar", "Pin bar Candle"),
+            ("Engulfing", "Engulfing Candle"), 
+            ("Small Body", "Small Candle"),
+            ("Pinbar", "Pin bar Candle"),
         ),
         blank=True,
         null=True
@@ -42,8 +42,8 @@ class MgiCandles(models.Model):
     session = models.CharField(
         max_length=15,
         choices=(
-            ("london", "London Session"),
-            ("newyork", "New York Session"),
+            ("London", "London Session"),
+            ("Newyork", "New York Session"),
         ),
         blank=True,
         null=True
