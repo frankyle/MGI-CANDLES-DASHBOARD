@@ -109,12 +109,15 @@ function TradersIdea() {
         <FormControl fullWidth sx={{ mt: 2 }}>
           <InputLabel>Currency Pair</InputLabel>
           <Select value={currencyPair} onChange={(e) => setCurrencyPair(e.target.value)}>
+          <MenuItem value="AUDCAD">AUDCAD</MenuItem>
             <MenuItem value="AUDUSD">AUDUSD</MenuItem>
-            <MenuItem value="AUDJPY">AUDNZD</MenuItem>
+            <MenuItem value="AUDCHF">AUDCHF</MenuItem>
+            <MenuItem value="AUDNZD">AUDNZD</MenuItem>
             <MenuItem value="AUDJPY">AUDJPY</MenuItem>
             <MenuItem value="BTCUSD">BTCUSD</MenuItem>
             <MenuItem value="CADJPY">CADJPY</MenuItem>
             <MenuItem value="CHFJPY">CHFJPY</MenuItem>
+            <MenuItem value="EURAUD">EURAUD</MenuItem>
             <MenuItem value="EURCAD">EURCAD</MenuItem>
             <MenuItem value="EURUSD">EURUSD</MenuItem>
             <MenuItem value="EURCHF">EURCHF</MenuItem>
@@ -136,7 +139,8 @@ function TradersIdea() {
             <MenuItem value="USOIL">USOIL</MenuItem>
             <MenuItem value="XAGUSD">XAGUSD</MenuItem>
             <MenuItem value="XAUUSD">XAUUSD</MenuItem>
-
+            <MenuItem value="JUMP75">JUMP75</MenuItem>
+            <MenuItem value="Vix10">Vix10</MenuItem>
           </Select>
         </FormControl>
 
@@ -216,7 +220,7 @@ function TradersIdea() {
           onChange={(e) => setPublisherTrader(e.target.value)}
           margin="normal"
         >
-          {['American Forecast', 'ForexWizard', 'FX_Elite_Club', 'Golden Engine', 'Gold Live-My strategy', 'Mjuni Fx', 'KhabiFx', 'Sir Drapo', 'SetupFx', 'StockSniper', 'TransparentFx'].map((platform) => (
+          {['FX_Elite_Club', 'Golden Engine', 'Mobbie_zw', 'Mjuni Fx', 'KhabiFx', 'Sir Drapo', 'SetupFx', 'StockSniper', 'TransparentFx', 'Other Trader'].map((platform) => (
             <MenuItem key={platform} value={platform}>
               {platform}
             </MenuItem>

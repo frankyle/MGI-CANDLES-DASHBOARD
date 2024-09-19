@@ -3,7 +3,7 @@ import SignalsSection from './SignalsSection'
 import BreakevenSection from './BreakevenSection'
 import SetupsSection from './SetupsSection'
 import ProfitSection from './ProfitSection'
-import LossSection from './LossSection'
+// import LossSection from './LossSection'
 import Footer from '../MgiWebsiteFree/Footer'
 
 const MgiWebsitePaid = () => {
@@ -13,7 +13,7 @@ const MgiWebsitePaid = () => {
     <div><BreakevenSection/></div>
     <div><SetupsSection/></div>
     <div><ProfitSection/></div>
-    <div><LossSection/></div>
+    {/* <div><LossSection/></div> */}
     <div><Footer/></div>
       
     </div>

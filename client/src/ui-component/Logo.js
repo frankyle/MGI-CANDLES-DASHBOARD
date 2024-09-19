@@ -18,7 +18,7 @@ const Logo = () => {
      * <img src={logo} alt="Berry" width="100" />
      *
      */
-    <h1>MGI-DASH</h1>
+    <h1>MGI Candles</h1>
   );
 };
 

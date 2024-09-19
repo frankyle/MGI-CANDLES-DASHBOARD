@@ -14,9 +14,8 @@ function TradersIdeaList() {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [selectedIdeaToDelete, setSelectedIdeaToDelete] = useState(null);
   
-  // New state for filters
-  const [publisherFilter, setPublisherFilter] = useState('');
-  const [currencyPairFilter, setCurrencyPairFilter] = useState('');
+  // New state for sorting
+  const [sortConfig, setSortConfig] = useState({ key: 'currency_pair', direction: 'asc' });
 
   useEffect(() => {
     const fetchTraderIdeas = async () => {
@@ -50,7 +49,6 @@ function TradersIdeaList() {
     setOpenEditModal(true); // Open the modal
   };
 
-
   const fetchCandles = () => {
     // Re-fetch the ideas after editing to refresh the list
     const fetchTraderIdeas = async () => {
@@ -64,13 +62,10 @@ function TradersIdeaList() {
     fetchTraderIdeas();
   };
 
-
-  
   const handleCloseEditModal = () => {
     setOpenEditModal(false); // Close the modal
     setSelectedIdeaToEdit(null); // Clear the selected idea after closing
   };
-
 
   const handleOpenDeleteModal = (idea) => {
     setSelectedIdeaToDelete(idea);
@@ -97,13 +92,23 @@ function TradersIdeaList() {
     }
   };
 
-  // Apply filters to the traderIdeas
-  const filteredTraderIdeas = traderIdeas.filter((idea) => {
-    return (
-      (publisherFilter === '' || idea.publisher_trader.toLowerCase().includes(publisherFilter.toLowerCase())) &&
-      (currencyPairFilter === '' || idea.currency_pair === currencyPairFilter)
-    );
+  // Sort the traderIdeas based on the sortConfig
+  const sortedTraderIdeas = [...traderIdeas].sort((a, b) => {
+    if (a[sortConfig.key] < b[sortConfig.key]) {
+      return sortConfig.direction === 'asc' ? -1 : 1;
+    }
+    if (a[sortConfig.key] > b[sortConfig.key]) {
+      return sortConfig.direction === 'asc' ? 1 : -1;
+    }
+    return 0;
   });
+
+  const handleSort = (key) => {
+    setSortConfig(prevConfig => ({
+      key,
+      direction: prevConfig.key === key && prevConfig.direction === 'asc' ? 'desc' : 'asc'
+    }));
+  };
 
   return (
     <Box sx={{ mt: 4 }}>
@@ -111,56 +116,14 @@ function TradersIdeaList() {
         Traders' Ideas
       </Typography>
 
-      {/* Filter Controls */}
+      {/* Sorting Controls */}
       <Box sx={{ mb: 2 }}>
-        <TextField
-          label="Filter by Publisher"
-          variant="outlined"
-          value={publisherFilter}
-          onChange={(e) => setPublisherFilter(e.target.value)}
-          sx={{ mr: 2, mb: 2 }}
-        />
-
-        <TextField
-          select
-          label="Filter by Currency Pair"
-          variant="outlined"
-          value={currencyPairFilter}
-          onChange={(e) => setCurrencyPairFilter(e.target.value)}
-          sx={{ mr: 2, mb: 2 }}
-        >
-          <MenuItem value="">All</MenuItem>
-          
-          <MenuItem value="AUDUSD">AUDUSD</MenuItem>
-            <MenuItem value="AUDJPY">AUDNZD</MenuItem>
-            <MenuItem value="AUDJPY">AUDJPY</MenuItem>
-            <MenuItem value="BTCUSD">BTCUSD</MenuItem>
-            <MenuItem value="CADJPY">CADJPY</MenuItem>
-            <MenuItem value="CHFJPY">CHFJPY</MenuItem>
-            <MenuItem value="EURCAD">EURCAD</MenuItem>
-            <MenuItem value="EURUSD">EURUSD</MenuItem>
-            <MenuItem value="EURCHF">EURCHF</MenuItem>
-            <MenuItem value="EURNZD">EURNZD</MenuItem>
-            <MenuItem value="EURJPY">EURJPY</MenuItem>
-            <MenuItem value="EURCAD">EURCAD</MenuItem>
-            <MenuItem value="GBPAUD">GBPAUD</MenuItem>
-            <MenuItem value="GBPCAD">GBPCAD</MenuItem>
-            <MenuItem value="GBPCHF">GBPCHF</MenuItem>
-            <MenuItem value="GBPJPY">GBPJPY</MenuItem>
-            <MenuItem value="GBPNZD">GBPNZD</MenuItem>
-            <MenuItem value="GBPUSD">GBPUSD</MenuItem>
-            <MenuItem value="NZDCAD">NZDCAD</MenuItem>
-            <MenuItem value="NZDJPY">NZDJPY</MenuItem>
-            <MenuItem value="NZDUSD">NZDUSD</MenuItem>
-            <MenuItem value="USDCAD">USDCAD</MenuItem>
-            <MenuItem value="USDCHF">USDCHF</MenuItem>
-            <MenuItem value="USDJPY">USDJPY</MenuItem>
-            <MenuItem value="USOIL">USOIL</MenuItem>
-            <MenuItem value="XAGUSD">XAGUSD</MenuItem>
-            <MenuItem value="XAUUSD">XAUUSD</MenuItem>
-
-           {/* Add more currency pairs as needed */}
-        </TextField>
+        <Button variant="contained" color="primary" onClick={() => handleSort('currency_pair')}>
+          Sort by Currency Pair {sortConfig.key === 'currency_pair' && (sortConfig.direction === 'asc' ? '🔽' : '🔼')}
+        </Button>
+        <Button variant="contained" color="primary" onClick={() => handleSort('publisher_trader')}>
+          Sort by Publisher {sortConfig.key === 'publisher_trader' && (sortConfig.direction === 'asc' ? '🔽' : '🔼')}
+        </Button>
       </Box>
 
       {loading ? (
@@ -181,7 +144,7 @@ function TradersIdeaList() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredTraderIdeas.map((idea, index) => (
+              {sortedTraderIdeas.map((idea, index) => (
                 <TableRow key={idea.id}>
                   <TableCell>{index + 1}</TableCell>
                   <TableCell onClick={() => handleOpenImageModal(idea)}>
@@ -199,7 +162,7 @@ function TradersIdeaList() {
                   <TableCell>{idea.publisher_trader}</TableCell>
                   <TableCell>{idea.trader_platform}</TableCell>
                   <TableCell>
-                  <Button
+                    <Button
                       variant="contained"
                       color="primary"
                       onClick={() => handleOpenEditModal(idea)} // Open edit modal with idea data
@@ -234,8 +197,8 @@ function TradersIdeaList() {
         </DialogActions>
       </Dialog>
 
-        {/* Render the TradersIdeasEditForm component */}
-        {selectedIdeaToEdit && (
+      {/* Render the TradersIdeasEditForm component */}
+      {selectedIdeaToEdit && (
         <TradersIdeasEditForm
           open={openEditModal} // Control modal open/close state
           onClose={handleCloseEditModal} // Handle closing the modal

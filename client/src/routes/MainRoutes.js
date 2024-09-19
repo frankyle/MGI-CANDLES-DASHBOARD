@@ -64,11 +64,12 @@ const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
-  path: '/',
+  
+  path: '/mtego/',
   element: <MainLayout />,
   children: [
     {
-      path: '/',
+      path: '/mtego/',
       element: <DashboardDefault />
     },
     {

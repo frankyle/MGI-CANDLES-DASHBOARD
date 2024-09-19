@@ -8,5 +8,5 @@ import WebsitesRoutes from './WebsiteRoutes';
 // ==============================|| ROUTING RENDER ||============================== //
 
 export default function ThemeRoutes() {
-  return useRoutes([MainRoutes, AuthenticationRoutes, WebsitesRoutes]);
+  return useRoutes([ WebsitesRoutes, MainRoutes, AuthenticationRoutes]);
 }

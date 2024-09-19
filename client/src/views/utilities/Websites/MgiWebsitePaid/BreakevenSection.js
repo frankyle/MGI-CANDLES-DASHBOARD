@@ -11,6 +11,8 @@ import {
   DialogContent,
   Button,
 } from '@mui/material';
+
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import useAxios from '../../../../routes/useAxios';
 
 const BreakevenSection = () => {
@@ -44,7 +46,14 @@ const BreakevenSection = () => {
 
   return (
     <Box sx={{ m: 3 }}>
-      <Typography variant="h2" component="h1" align="center" gutterBottom className="section-title">
+      <Typography 
+      variant="h1" 
+      component="h1" 
+      align="center" 
+      gutterBottom 
+      className="section-title"
+      sx={{ mt: 5, mb: 5 }}
+      >
         Breakeven Candles
       </Typography>
       <Grid container spacing={3}>
@@ -158,6 +167,14 @@ const BreakevenSection = () => {
         </DialogContent>
         <Button onClick={handleCloseImageModal} sx={{ m: 2 }}>Close</Button>
       </Dialog>
+
+      {/* "More >" Button */}
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
+        <Button variant="contained" endIcon={<ArrowForwardIcon />} sx={{ bgcolor: 'primary.main' }}>
+          More
+        </Button>
+      </Box>
+
     </Box>
   );
 };

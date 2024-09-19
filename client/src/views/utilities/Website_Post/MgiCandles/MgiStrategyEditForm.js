@@ -161,24 +161,38 @@ const MgiStrategyEditForm = ({ open, onClose, candleToEdit, fetchCandles }) => {
               <FormControl fullWidth>
                 <InputLabel>Currency Pair</InputLabel>
                 <Select name="currency_pair" value={candle.currency_pair} onChange={handleChange}>
-                  <MenuItem value="AUDUSD">AUDUSD</MenuItem>
-                  <MenuItem value="AUDJPY">AUDJPY</MenuItem>
-                  <MenuItem value="AUDCAD">AUDCAD</MenuItem>
-                  <MenuItem value="CADJPY">CADJPY</MenuItem>
-                  <MenuItem value="GBPUSD">GBPUSD</MenuItem>
-                  <MenuItem value="GBPCAD">GBPCAD</MenuItem>
-                  <MenuItem value="GBPCHF">GBPCHF</MenuItem>
-                  <MenuItem value="GBPJPY">GBPJPY</MenuItem>
-                  <MenuItem value="EURUSD">EURUSD</MenuItem>
-                  <MenuItem value="EURJPY">EURJPY</MenuItem>
-                  <MenuItem value="EURCAD">EURCAD</MenuItem>
-                  <MenuItem value="USDCAD">USDCAD</MenuItem>
-                  <MenuItem value="USDCHF">USDCHF</MenuItem>
-                  <MenuItem value="NZDUSD">NZDUSD</MenuItem>
-                  <MenuItem value="NZDCAD">NZDCAD</MenuItem>
-                  <MenuItem value="XAUUSD">XAUUSD</MenuItem>
-                  <MenuItem value="USOIL">USOIL</MenuItem>
-                </Select>
+            <MenuItem value="AUDCAD">AUDCAD</MenuItem>
+            <MenuItem value="AUDUSD">AUDUSD</MenuItem>
+            <MenuItem value="AUDNZD">AUDNZD</MenuItem>
+            <MenuItem value="AUDJPY">AUDJPY</MenuItem>
+            <MenuItem value="BTCUSD">BTCUSD</MenuItem>
+            <MenuItem value="CADJPY">CADJPY</MenuItem>
+            <MenuItem value="CHFJPY">CHFJPY</MenuItem>
+            <MenuItem value="EURAUD">EURAUD</MenuItem>
+            <MenuItem value="EURCAD">EURCAD</MenuItem>
+            <MenuItem value="EURUSD">EURUSD</MenuItem>
+            <MenuItem value="EURCHF">EURCHF</MenuItem>
+            <MenuItem value="EURNZD">EURNZD</MenuItem>
+            <MenuItem value="EURJPY">EURJPY</MenuItem>
+            <MenuItem value="EURCAD">EURCAD</MenuItem>
+            <MenuItem value="GBPAUD">GBPAUD</MenuItem>
+            <MenuItem value="GBPCAD">GBPCAD</MenuItem>
+            <MenuItem value="GBPCHF">GBPCHF</MenuItem>
+            <MenuItem value="GBPJPY">GBPJPY</MenuItem>
+            <MenuItem value="GBPNZD">GBPNZD</MenuItem>
+            <MenuItem value="GBPUSD">GBPUSD</MenuItem>
+            <MenuItem value="NZDCAD">NZDCAD</MenuItem>
+            <MenuItem value="NZDJPY">NZDJPY</MenuItem>
+            <MenuItem value="NZDUSD">NZDUSD</MenuItem>
+            <MenuItem value="USDCAD">USDCAD</MenuItem>
+            <MenuItem value="USDCHF">USDCHF</MenuItem>
+            <MenuItem value="USDJPY">USDJPY</MenuItem>
+            <MenuItem value="USOIL">USOIL</MenuItem>
+            <MenuItem value="XAGUSD">XAGUSD</MenuItem>
+            <MenuItem value="XAUUSD">XAUUSD</MenuItem>
+            <MenuItem value="JUMP75">JUMP75</MenuItem>
+            <MenuItem value="Vix10">Vix10</MenuItem>
+            </Select>
               </FormControl>
 
               <FormControl fullWidth sx={{ mt: 2 }}>
@@ -303,6 +317,16 @@ const MgiStrategyEditForm = ({ open, onClose, candleToEdit, fetchCandles }) => {
                 }
                 label="Change Color UT Alert"
               />
+               <FormControlLabel
+            control={
+              <Checkbox
+                name="is_active"
+                checked={candle.is_active}
+                onChange={handleChange}
+              />
+            }
+            label="Active"
+          />
             </Grid>
             <Grid item xs={6}>
             {/* Image upload fields */}

@@ -169,7 +169,7 @@ function TradersIdeasEditForm({ open, onClose, candleToEdit, fetchCandles }) {
             onChange={handleInputChange}
             margin="normal"
           >
-            {['American Forecast', 'ForexWizard', 'FX_Elite_Club', 'Golden Engine', 'Gold Live-My strategy', 'Mjuni Fx', 'KhabiFx', 'Sir Drapo', 'SetupFx', 'StockSniper', 'TransparentFx'].map((platform) => (
+             {['FX_Elite_Club', 'Golden Engine', 'Mobbie_zw', 'Mjuni Fx', 'KhabiFx', 'Sir Drapo', 'SetupFx', 'StockSniper', 'TransparentFx', 'Other Trader'].map((platform) => (
               <MenuItem key={platform} value={platform}>
                 {platform}
               </MenuItem>

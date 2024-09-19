@@ -11,6 +11,7 @@ import {
   DialogContent,
   Button,
 } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import useAxios from '../../../../routes/useAxios';
 
 const SetupsSection = () => {
@@ -43,83 +44,95 @@ const SetupsSection = () => {
   };
 
   return (
-    <Box sx={{ m: 3 }}>
-      <Typography variant="h2" component="h1" align="center" gutterBottom className="section-title">
-        Daily Forex Entries
-      </Typography>
+    <Box sx={{ m: 3, position: 'relative' }}>
+      <Typography
+        variant="h1"
+        component="h1"
+        align="center"
+        gutterBottom
+        className="section-title"
+        sx={{ mt: 5, mb: 5 }}  // Add top and bottom margins
+      >
+       Forecast / Setups Pairs
+</Typography>
+
       <Grid container spacing={3}>
         {candles
-          .filter((candle) => candle.signal_candle) // Only include candles that have an image
-          .sort((a, b) => b.id - a.id) // Sort by ID in descending order (latest first)
-          .slice(0, 6) // Get only the latest 6 candles
+          .filter((candle) => candle.signal_candle) // Only include candles with images
+          .sort((a, b) => b.is_active - a.is_active || b.id - a.id) // Sort by active status first, then by ID
+          .slice(0, 8) // Limit to 8 cards
           .map((candle) => (
-          <Grid item xs={12} sm={6} md={4} key={candle.id}>
-            <Card>
-              <CardMedia
-                component="img"
-                height="200"
-                image={candle.signal_candle}
-                alt="Entry Candle"
-                onClick={() => handleOpenImageModal(candle.signal_candle)}
-                sx={{ cursor: 'pointer' }}
-              />
-              <CardContent>
-                {/* Trade Signal */}
-                <Typography variant="body1">
-                  <strong>Trade Signal:</strong>{' '}
-                  <span
-                    style={{
-                      color: candle.trade_signal.toUpperCase() === 'BUY' ? 'blue' : 'red',
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    {candle.trade_signal.toUpperCase()}
-                  </span>
-                </Typography>
+            <Grid item xs={12} sm={6} md={3} key={candle.id}>
+              <Card>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image={candle.signal_candle}
+                  alt="Entry Candle"
+                  onClick={() => handleOpenImageModal(candle.signal_candle)}
+                  sx={{ cursor: 'pointer' }}
+                />
+                <CardContent>
+                  {/* Currency Pair */}
+                  <Typography variant="h3" gutterBottom>
+                    <strong>{candle.currency_pair}</strong>
+                  </Typography>
 
-                {/* Status */}
-                <Typography variant="body1">
-                  <strong>Status:</strong>{' '}
-                  <span
-                    style={{
-                      color: candle.is_active ? 'blue' : 'red',
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    {candle.is_active ? 'Active' : 'Inactive'}
-                  </span>
-                </Typography>
+                  {/* Trade Signal */}
+                  <Typography variant="body1">
+                    <strong>Trade Signal:</strong>{' '}
+                    <span
+                      style={{
+                        color: candle.trade_signal.toUpperCase() === 'BUY' ? 'blue' : 'red',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {candle.trade_signal.toUpperCase()}
+                    </span>
+                  </Typography>
 
-            
-                {/* 4hr Flip Candle */}
-                <Typography variant="body1">
-                  <strong>4hr Flip Candle:</strong>{' '}
-                  <span
-                    style={{
-                      color: candle.flip_four_hour_candle ? 'blue' : 'red',
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    {candle.flip_four_hour_candle ? 'Yes' : 'No'}
-                  </span>
-                </Typography>
+                  {/* Status */}
+                  <Typography variant="body1">
+                    <strong>Status:</strong>{' '}
+                    <span
+                      style={{
+                        color: candle.is_active ? 'green' : 'red',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {candle.is_active ? 'Active' : 'Inactive'}
+                    </span>
+                  </Typography>
 
-                {/* 4hr Break of Structure */}
-                <Typography variant="body1">
-                  <strong>4hr Break of Structure:</strong>{' '}
-                  <span
-                    style={{
-                      color: candle.four_hour_break_of_structure ? 'blue' : 'red',
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    {candle.four_hour_break_of_structure ? 'Yes' : 'No'}
-                  </span>
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
+                  {/* 4hr Flip Candle */}
+                  <Typography variant="body1">
+                    <strong>4hr Flip Candle:</strong>{' '}
+                    <span
+                      style={{
+                        color: candle.flip_four_hour_candle ? 'blue' : 'red',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {candle.flip_four_hour_candle ? 'Yes' : 'No'}
+                    </span>
+                  </Typography>
+
+                  {/* 4hr Break of Structure */}
+                  <Typography variant="body1">
+                    <strong>4hr Break of Structure:</strong>{' '}
+                    <span
+                      style={{
+                        color: candle.four_hour_break_of_structure ? 'blue' : 'red',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {candle.four_hour_break_of_structure ? 'Yes' : 'No'}
+                    </span>
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
       </Grid>
 
       {/* Full Image Modal */}
@@ -136,6 +149,13 @@ const SetupsSection = () => {
         </DialogContent>
         <Button onClick={handleCloseImageModal} sx={{ m: 2 }}>Close</Button>
       </Dialog>
+
+      {/* "More >" Button */}
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
+        <Button variant="contained" endIcon={<ArrowForwardIcon />} sx={{ bgcolor: 'primary.main' }}>
+          More
+        </Button>
+      </Box>
     </Box>
   );
 };
