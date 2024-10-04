@@ -18,6 +18,18 @@ const MgiStrategyEditForm = ({ open, onClose, candleToEdit, fetchCandles }) => {
     entry_candle: null,
     breakeven_candle: null,
     take_profit_candle: null,
+
+    idea_candle: null,
+    line_graph_candle: null,
+    monday_candle: null,
+    tuesday_candle: null,
+    wednesday_candle: null,
+    thursday_candle: null,
+    friday_candle: null,
+    saturday_candle: null,
+    sunday_candle: null,
+
+
     trade_signal: '',
     is_active: false,
     candle_pattern: '',
@@ -37,6 +49,18 @@ const MgiStrategyEditForm = ({ open, onClose, candleToEdit, fetchCandles }) => {
   const [breakevenCandleUrl, setBreakevenCandleUrl] = useState(null);
   const [takeProfitCandleUrl, setTakeProfitCandleUrl] = useState(null);
  
+
+  const [ideaCandleUrl, setIdeaCandleUrl] = useState(null);
+  const [lineGraphCandleUrl, setLineGraphCandleUrl] = useState(null);
+
+  const [mondayCandleUrl, setMondayCandleUrl] = useState(null);
+  const [tuesdayCandleUrl, setTuesdayCandleUrl] = useState(null);
+  const [wednesdayCandleUrl, setWednesdayCandleUrl] = useState(null);
+  const [thursdayCandleUrl, setThursdayCandleUrl] = useState(null);
+  const [fridayCandleUrl, setFridayCandleUrl] = useState(null);
+  const [saturdayCandleUrl, setSaturdayCandleUrl] = useState(null);
+  const [sundayCandleUrl, setSundayCandleUrl] = useState(null);
+
   const [message, setMessage] = useState('');
 
   useEffect(() => {
@@ -48,6 +72,18 @@ const MgiStrategyEditForm = ({ open, onClose, candleToEdit, fetchCandles }) => {
       setEntryCandleUrl(candleToEdit.entry_candle);
       setBreakevenCandleUrl(candleToEdit.breakeven_candle);
       setTakeProfitCandleUrl(candleToEdit.take_profit_candle);
+
+      // Filling the additional constants
+    setIdeaCandleUrl(candleToEdit.idea_candle);
+    setLineGraphCandleUrl(candleToEdit.line_graph_candle);
+    
+    setMondayCandleUrl(candleToEdit.monday_candle);
+    setTuesdayCandleUrl(candleToEdit.tuesday_candle);
+    setWednesdayCandleUrl(candleToEdit.wednesday_candle);
+    setThursdayCandleUrl(candleToEdit.thursday_candle);
+    setFridayCandleUrl(candleToEdit.friday_candle);
+    setSaturdayCandleUrl(candleToEdit.saturday_candle);
+    setSundayCandleUrl(candleToEdit.sunday_candle);
     }
   }, [candleToEdit]);
 
@@ -86,9 +122,41 @@ const MgiStrategyEditForm = ({ open, onClose, candleToEdit, fetchCandles }) => {
       case 'take_profit_candle':
         setTakeProfitCandleUrl(url);
         break;
+      
+      // New cases
+      case 'idea_candle':
+        setIdeaCandleUrl(url);
+        break;
+      case 'line_graph_candle':
+        setLineGraphCandleUrl(url);
+        break;
+      
+      case 'monday_candle':
+        setMondayCandleUrl(url);
+        break;
+      case 'tuesday_candle':
+        setTuesdayCandleUrl(url);
+        break;
+      case 'wednesday_candle':
+        setWednesdayCandleUrl(url);
+        break;
+      case 'thursday_candle':
+        setThursdayCandleUrl(url);
+        break;
+      case 'friday_candle':
+        setFridayCandleUrl(url);
+        break;
+      case 'saturday_candle':
+        setSaturdayCandleUrl(url);
+        break;
+      case 'sunday_candle':
+        setSundayCandleUrl(url);
+        break;
+    
       default:
         break;
     }
+    
   };
 
 
@@ -108,22 +176,32 @@ const MgiStrategyEditForm = ({ open, onClose, candleToEdit, fetchCandles }) => {
 
     const formData = new FormData();
 
-    // Append non-file fields to formData
-    Object.keys(candle).forEach(key => {
-      // Skip file fields when appending non-file fields
-      if (!['signal_candle', 'hour_candle', 'two_hour_candle', 'entry_candle', 'breakeven_candle', 'take_profit_candle'].includes(key)) {
-        formData.append(key, candle[key]);
-      }
-    });
-  
-    // Append file fields only if they are updated
-    const fileFields = ['signal_candle', 'hour_candle', 'two_hour_candle', 'entry_candle', 'breakeven_candle', 'take_profit_candle'];
-    fileFields.forEach(field => {
-      if (candle[field] instanceof File) {
-        formData.append(field, candle[field]);
-      }
-    });
-  
+  // Append non-file fields to formData
+Object.keys(candle).forEach(key => {
+  // Skip file fields when appending non-file fields
+  if (![
+    'signal_candle', 'hour_candle', 'two_hour_candle', 'entry_candle', 
+    'breakeven_candle', 'take_profit_candle', 'idea_candle', 'line_graph_candle', 
+    'monday_candle', 'tuesday_candle', 'wednesday_candle', 'thursday_candle', 
+    'friday_candle', 'saturday_candle', 'sunday_candle'
+  ].includes(key)) {
+    formData.append(key, candle[key]);
+  }
+});
+
+// Append file fields only if they are updated
+const fileFields = [
+  'signal_candle', 'hour_candle', 'two_hour_candle', 'entry_candle', 
+  'breakeven_candle', 'take_profit_candle', 'idea_candle', 'line_graph_candle', 
+  'monday_candle', 'tuesday_candle', 'wednesday_candle', 'thursday_candle', 
+  'friday_candle', 'saturday_candle', 'sunday_candle'
+];
+fileFields.forEach(field => {
+  if (candle[field] instanceof File) {
+    formData.append(field, candle[field]);
+  }
+});
+
 
       try {
         const response = await api.put(`/mgi/mgicandles/${candle.id}/`, formData, {
@@ -328,7 +406,54 @@ const MgiStrategyEditForm = ({ open, onClose, candleToEdit, fetchCandles }) => {
             label="Active"
           />
             </Grid>
-            <Grid item xs={6}>
+            <Grid container spacing={2}>
+
+
+              
+            {/* Idea Candle uploads */}
+
+            <Box sx={{ textAlign: 'center', mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <input
+                accept="image/*"
+                style={{ display: 'none' }}
+                id="idea-candle-file"
+                type="file"
+                name="idea_candle"
+                onChange={handleFileChange}
+              />
+              <label htmlFor="idea-candle-file">
+                <IconButton color="primary" component="span">
+                  <UploadFile />
+                </IconButton>
+                <Typography variant="caption">Upload Idea Candle</Typography>
+              </label>
+              {ideaCandleUrl && (
+                <img src={ideaCandleUrl} alt="Idea Candle" width={100} style={{ marginLeft: '10px' }} />
+              )}
+            </Box>
+
+            {/* Linegraph Candle uploads */}
+
+            <Box sx={{ textAlign: 'center', mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <input
+                accept="image/*"
+                style={{ display: 'none' }}
+                id="line-graph-candle-file"
+                type="file"
+                name="line_graph_candle"
+                onChange={handleFileChange}
+              />
+              <label htmlFor="line-graph-candle-file">
+                <IconButton color="primary" component="span">
+                  <UploadFile />
+                </IconButton>
+                <Typography variant="caption">Upload Line Graph Candle</Typography>
+              </label>
+              {lineGraphCandleUrl && (
+                <img src={lineGraphCandleUrl} alt="Line Graph Candle" width={100} style={{ marginLeft: '10px' }} />
+              )}
+            </Box>
+
             {/* Image upload fields */}
             <Box sx={{ textAlign: 'center', mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <input
@@ -354,26 +479,6 @@ const MgiStrategyEditForm = ({ open, onClose, candleToEdit, fetchCandles }) => {
               <input
                 accept="image/*"
                 style={{ display: 'none' }}
-                id="hour-candle-file"
-                type="file"
-                name="hour_candle"
-                onChange={handleFileChange}
-              />
-              <label htmlFor="hour-candle-file">
-                <IconButton color="primary" component="span">
-                  <UploadFile />
-                </IconButton>
-                <Typography variant="caption">Upload Hour Candle</Typography>
-              </label>
-              {hourCandleUrl && (
-                <img src={hourCandleUrl} alt="Hour Candle" width={100} style={{ marginLeft: '10px' }} />
-              )}
-            </Box>
-
-            <Box sx={{ textAlign: 'center', mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <input
-                accept="image/*"
-                style={{ display: 'none' }}
                 id="two-hour-candle-file"
                 type="file"
                 name="two_hour_candle"
@@ -390,6 +495,28 @@ const MgiStrategyEditForm = ({ open, onClose, candleToEdit, fetchCandles }) => {
               )}
             </Box>
 
+
+            <Box sx={{ textAlign: 'center', mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <input
+                accept="image/*"
+                style={{ display: 'none' }}
+                id="hour-candle-file"
+                type="file"
+                name="hour_candle"
+                onChange={handleFileChange}
+              />
+              <label htmlFor="hour-candle-file">
+                <IconButton color="primary" component="span">
+                  <UploadFile />
+                </IconButton>
+                <Typography variant="caption">Upload Hour Candle</Typography>
+              </label>
+              {hourCandleUrl && (
+                <img src={hourCandleUrl} alt="Hour Candle" width={100} style={{ marginLeft: '10px' }} />
+              )}
+            </Box>
+
+     
             <Box sx={{ textAlign: 'center', mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <input
                 accept="image/*"
@@ -449,6 +576,150 @@ const MgiStrategyEditForm = ({ open, onClose, candleToEdit, fetchCandles }) => {
                 <img src={takeProfitCandleUrl} alt="Take Profit Candle" width={100} style={{ marginLeft: '10px' }} />
               )}
             </Box>
+
+  {/* Weekday Candle uploads */}
+  <Box sx={{ textAlign: 'center', mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <input
+      accept="image/*"
+      style={{ display: 'none' }}
+      id="monday-candle-file"
+      type="file"
+      name="monday_candle"
+      onChange={handleFileChange}
+    />
+    <label htmlFor="monday-candle-file">
+      <IconButton color="primary" component="span">
+        <UploadFile />
+      </IconButton>
+      <Typography variant="caption">Upload Monday Candle</Typography>
+    </label>
+    {mondayCandleUrl && (
+      <img src={mondayCandleUrl} alt="Monday Candle" width={100} style={{ marginLeft: '10px' }} />
+    )}
+  </Box>
+
+  <Box sx={{ textAlign: 'center', mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <input
+      accept="image/*"
+      style={{ display: 'none' }}
+      id="tuesday-candle-file"
+      type="file"
+      name="tuesday_candle"
+      onChange={handleFileChange}
+    />
+    <label htmlFor="tuesday-candle-file">
+      <IconButton color="primary" component="span">
+        <UploadFile />
+      </IconButton>
+      <Typography variant="caption">Upload Tuesday Candle</Typography>
+    </label>
+    {tuesdayCandleUrl && (
+      <img src={tuesdayCandleUrl} alt="Tuesday Candle" width={100} style={{ marginLeft: '10px' }} />
+    )}
+  </Box>
+
+  <Box sx={{ textAlign: 'center', mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <input
+      accept="image/*"
+      style={{ display: 'none' }}
+      id="wednesday-candle-file"
+      type="file"
+      name="wednesday_candle"
+      onChange={handleFileChange}
+    />
+    <label htmlFor="wednesday-candle-file">
+      <IconButton color="primary" component="span">
+        <UploadFile />
+      </IconButton>
+      <Typography variant="caption">Upload Wednesday Candle</Typography>
+    </label>
+    {wednesdayCandleUrl && (
+      <img src={wednesdayCandleUrl} alt="Wednesday Candle" width={100} style={{ marginLeft: '10px' }} />
+    )}
+  </Box>
+
+  <Box sx={{ textAlign: 'center', mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <input
+      accept="image/*"
+      style={{ display: 'none' }}
+      id="thursday-candle-file"
+      type="file"
+      name="thursday_candle"
+      onChange={handleFileChange}
+    />
+    <label htmlFor="thursday-candle-file">
+      <IconButton color="primary" component="span">
+        <UploadFile />
+      </IconButton>
+      <Typography variant="caption">Upload Thursday Candle</Typography>
+    </label>
+    {thursdayCandleUrl && (
+      <img src={thursdayCandleUrl} alt="Thursday Candle" width={100} style={{ marginLeft: '10px' }} />
+    )}
+  </Box>
+
+  <Box sx={{ textAlign: 'center', mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <input
+      accept="image/*"
+      style={{ display: 'none' }}
+      id="friday-candle-file"
+      type="file"
+      name="friday_candle"
+      onChange={handleFileChange}
+    />
+    <label htmlFor="friday-candle-file">
+      <IconButton color="primary" component="span">
+        <UploadFile />
+      </IconButton>
+      <Typography variant="caption">Upload Friday Candle</Typography>
+    </label>
+    {fridayCandleUrl && (
+      <img src={fridayCandleUrl} alt="Friday Candle" width={100} style={{ marginLeft: '10px' }} />
+    )}
+  </Box>
+
+  <Box sx={{ textAlign: 'center', mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <input
+      accept="image/*"
+      style={{ display: 'none' }}
+      id="saturday-candle-file"
+      type="file"
+      name="saturday_candle"
+      onChange={handleFileChange}
+    />
+    <label htmlFor="saturday-candle-file">
+      <IconButton color="primary" component="span">
+        <UploadFile />
+      </IconButton>
+      <Typography variant="caption">Upload Saturday Candle</Typography>
+    </label>
+    {saturdayCandleUrl && (
+      <img src={saturdayCandleUrl} alt="Saturday Candle" width={100} style={{ marginLeft: '10px' }} />
+    )}
+  </Box>
+
+  <Box sx={{ textAlign: 'center', mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <input
+      accept="image/*"
+      style={{ display: 'none' }}
+      id="sunday-candle-file"
+      type="file"
+      name="sunday_candle"
+      onChange={handleFileChange}
+    />
+    <label htmlFor="sunday-candle-file">
+      <IconButton color="primary" component="span">
+        <UploadFile />
+      </IconButton>
+      <Typography variant="caption">Upload Sunday Candle</Typography>
+    </label>
+    {sundayCandleUrl && (
+      <img src={sundayCandleUrl} alt="Sunday Candle" width={100} style={{ marginLeft: '10px' }} />
+    )}
+  </Box>
+
+
+  
           </Grid>
 
           </Grid>

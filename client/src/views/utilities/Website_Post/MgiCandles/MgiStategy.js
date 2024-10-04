@@ -12,6 +12,7 @@ import UploadFile from '@mui/icons-material/UploadFile';
 import ArrowUpward from '@mui/icons-material/ArrowUpward';
 import ArrowDownward from '@mui/icons-material/ArrowDownward';
 import useAxios from './../../../../routes/useAxios';
+import Grid from '@mui/material/Grid';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -43,10 +44,18 @@ const MgiStrategy = () => {
   const [changeColorUTAlert, setChangeColorUTAlert] = useState(false);
   const [submittedData, setSubmittedData] = useState([]);
 
+    // Idea Candle
+    const [ideaCandle, setIdeaCandle] = useState(null);
+    const [ideaCandleUrl, setIdeaCandleUrl] = useState(null);
+ 
+    //  Line Graph Candle
+    const [lineGraphCandle, setLineGraphCandle] = useState(null);
+    const [lineGraphCandleUrl, setLineGraphCandleUrl] = useState(null);
+  
     // Signal Candle
-  const [signalCandle, setSignalCandle] = useState(null);
-  const [signalCandleUrl, setSignalCandleUrl] = useState(null);
-
+    const [signalCandle, setSignalCandle] = useState(null);
+    const [signalCandleUrl, setSignalCandleUrl] = useState(null);
+  
   // Hour Candle
   const [hourCandle, setHourCandle] = useState(null);
   const [hourCandleUrl, setHourCandleUrl] = useState(null);
@@ -66,6 +75,27 @@ const MgiStrategy = () => {
   // Take Profit Candle
   const [takeProfitCandle, setTakeProfitCandle] = useState(null);
   const [takeProfitCandleUrl, setTakeProfitCandleUrl] = useState(null);
+
+  const [mondayCandle, setMondayCandle] = useState(null);
+  const [mondayCandleUrl, setMondayCandleUrl] = useState(null);
+
+  const [tuesdayCandle, setTuesdayCandle] = useState(null);
+  const [tuesdayCandleUrl, setTuesdayCandleUrl] = useState(null);
+
+  const [wednesdayCandle, setWednesdayCandle] = useState(null);
+  const [wednesdayCandleUrl, setWednesdayCandleUrl] = useState(null);
+
+  const [thursdayCandle, setThursdayCandle] = useState(null);
+  const [thursdayCandleUrl, setThursdayCandleUrl] = useState(null);
+
+  const [fridayCandle, setFridayCandle] = useState(null);
+  const [fridayCandleUrl, setFridayCandleUrl] = useState(null);
+
+  const [saturdayCandle, setSaturdayCandle] = useState(null);
+  const [saturdayCandleUrl, setSaturdayCandleUrl] = useState(null);
+
+  const [sundayCandle, setSundayCandle] = useState(null);
+  const [sundayCandleUrl, setSundayCandleUrl] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -92,6 +122,19 @@ const MgiStrategy = () => {
     if (entryCandle) formData.append('entry_candle', entryCandle);
     if (breakevenCandle) formData.append('breakeven_candle', breakevenCandle);
     if (takeProfitCandle) formData.append('take_profit_candle', takeProfitCandle);
+   
+
+    if (ideaCandle) formData.append('idea_candle', ideaCandle);
+    if (lineGraphCandle) formData.append('line_graph_candle', lineGraphCandle);
+  
+  
+    if (mondayCandle) formData.append('monday_candle', mondayCandle);
+    if (tuesdayCandle) formData.append('tuesday_candle', tuesdayCandle);
+    if (wednesdayCandle) formData.append('wednesday_candle', wednesdayCandle);
+    if (thursdayCandle) formData.append('thursday_candle', thursdayCandle);
+    if (fridayCandle) formData.append('friday_candle', fridayCandle);
+    if (saturdayCandle) formData.append('saturday_candle', saturdayCandle);
+    if (sundayCandle) formData.append('sunday_candle', sundayCandle);
   
     try {
       const response = await api.post('/mgi/mgicandles/', formData, {
@@ -111,6 +154,18 @@ const MgiStrategy = () => {
         setBreakevenCandle(null);
         setTakeProfitCandle(null);
   
+        setIdeaCandle(null);
+        setLineGraphCandle(null);
+        
+        setMondayCandle(null);
+        setTuesdayCandle(null);
+        setWednesdayCandle(null);
+        setThursdayCandle(null);
+        setFridayCandle(null);
+        setSaturdayCandle(null);
+        setSundayCandle(null);
+        
+        
         setTradeSignal('');
         setIsActive(false);
         setCandlePattern('');
@@ -143,7 +198,18 @@ const MgiStrategy = () => {
             twoHourCandle,     
             entryCandle,       
             breakevenCandle,   
-            takeProfitCandle   
+            takeProfitCandle,
+
+            ideaCandle,
+            lineGraphCandle,  
+
+            mondayCandle,
+            tuesdayCandle,
+            wednesdayCandle,
+            thursdayCandle,
+            fridayCandle,
+            saturdayCandle,
+            sundayCandle,
           }
         ]);
   
@@ -191,6 +257,61 @@ const MgiStrategy = () => {
     setTakeProfitCandle(file);
     setTakeProfitCandleUrl(URL.createObjectURL(file));
   };
+
+  const handleMondayCandleChange = (event) => {
+    const file = event.target.files[0];
+    setMondayCandle(file);
+    setMondayCandleUrl(URL.createObjectURL(file)); // Assume you also create a state for the URL
+  };
+  
+  const handleTuesdayCandleChange = (event) => {
+    const file = event.target.files[0];
+    setTuesdayCandle(file);
+    setTuesdayCandleUrl(URL.createObjectURL(file)); // Assume you also create a state for the URL
+  };
+  
+  const handleWednesdayCandleChange = (event) => {
+    const file = event.target.files[0];
+    setWednesdayCandle(file);
+    setWednesdayCandleUrl(URL.createObjectURL(file)); // Assume you also create a state for the URL
+  };
+  
+  const handleThursdayCandleChange = (event) => {
+    const file = event.target.files[0];
+    setThursdayCandle(file);
+    setThursdayCandleUrl(URL.createObjectURL(file)); // Assume you also create a state for the URL
+  };
+  
+  const handleFridayCandleChange = (event) => {
+    const file = event.target.files[0];
+    setFridayCandle(file);
+    setFridayCandleUrl(URL.createObjectURL(file)); // Assume you also create a state for the URL
+  };
+  
+  const handleSaturdayCandleChange = (event) => {
+    const file = event.target.files[0];
+    setSaturdayCandle(file);
+    setSaturdayCandleUrl(URL.createObjectURL(file)); // Assume you also create a state for the URL
+  };
+  
+  const handleSundayCandleChange = (event) => {
+    const file = event.target.files[0];
+    setSundayCandle(file);
+    setSundayCandleUrl(URL.createObjectURL(file)); // Assume you also create a state for the URL
+  };
+  
+  const handleIdeaCandleChange = (event) => {
+    const file = event.target.files[0];
+    setIdeaCandle(file);
+    setIdeaCandleUrl(URL.createObjectURL(file)); // Assume you also create a state for the URL
+  };
+  
+  const handleLineGraphCandleChange = (event) => {
+    const file = event.target.files[0];
+    setLineGraphCandle(file);
+    setLineGraphCandleUrl(URL.createObjectURL(file)); // Assume you also create a state for the URL
+  };
+  
   
   useEffect(() => {
     return () => {
@@ -213,8 +334,52 @@ const MgiStrategy = () => {
       if (takeProfitCandleUrl) {
         URL.revokeObjectURL(takeProfitCandleUrl);
       }
+      // Revoke object URLs for new candle fields
+      if (mondayCandleUrl) {
+        URL.revokeObjectURL(mondayCandleUrl);
+      }
+      if (tuesdayCandleUrl) {
+        URL.revokeObjectURL(tuesdayCandleUrl);
+      }
+      if (wednesdayCandleUrl) {
+        URL.revokeObjectURL(wednesdayCandleUrl);
+      }
+      if (thursdayCandleUrl) {
+        URL.revokeObjectURL(thursdayCandleUrl);
+      }
+      if (fridayCandleUrl) {
+        URL.revokeObjectURL(fridayCandleUrl);
+      }
+      if (saturdayCandleUrl) {
+        URL.revokeObjectURL(saturdayCandleUrl);
+      }
+      if (sundayCandleUrl) {
+        URL.revokeObjectURL(sundayCandleUrl);
+      }
+      if (ideaCandleUrl) {
+        URL.revokeObjectURL(ideaCandleUrl);
+      }
+      if (lineGraphCandleUrl) {
+        URL.revokeObjectURL(lineGraphCandleUrl);
+      }
     };
-  }, [signalCandleUrl, hourCandleUrl, twoHourCandleUrl, entryCandleUrl, breakevenCandleUrl, takeProfitCandleUrl]);
+  }, [
+    signalCandleUrl,
+    hourCandleUrl,
+    twoHourCandleUrl,
+    entryCandleUrl,
+    breakevenCandleUrl,
+    takeProfitCandleUrl,
+    mondayCandleUrl,
+    tuesdayCandleUrl,
+    wednesdayCandleUrl,
+    thursdayCandleUrl,
+    fridayCandleUrl,
+    saturdayCandleUrl,
+    sundayCandleUrl,
+    ideaCandleUrl,
+    lineGraphCandleUrl,
+  ]);
   
 
   // Styled TableHead for customization
@@ -280,6 +445,75 @@ const MgiStrategy = () => {
         </FormControl>
 
               <Box>
+              <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+          {/* Idea Candle */}
+          <Typography variant="subtitle1" sx={{ mb: 2, mt: 2 }}>
+            Idea Candle
+          </Typography>
+          {ideaCandleUrl && (
+            <img
+              src={ideaCandleUrl}
+              alt="Idea Candle"
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                borderRadius: 4,
+                border: '2px solid #ccc',
+                objectFit: 'cover',
+              }}
+            />
+          )}
+          <input
+            accept="image/*"
+            style={{ display: 'none' }}
+            id="idea-candle-input"
+            type="file"
+            onChange={handleIdeaCandleChange}
+          />
+          <label htmlFor="idea-candle-input">
+            <IconButton color="primary" aria-label="upload idea candle" component="span">
+              <UploadFile />
+            </IconButton>
+          </label>
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+        {/* Line Graph Candle */}
+        <Typography variant="subtitle1" sx={{ mb: 2, mt: 2 }}>
+          Line Graph Candle
+        </Typography>
+        {lineGraphCandleUrl && (
+          <img
+            src={lineGraphCandleUrl}
+            alt="Line Graph Candle"
+            style={{
+              width: '100%',
+              height: 'auto',
+              display: 'block',
+              borderRadius: 4,
+              border: '2px solid #ccc',
+              objectFit: 'cover',
+            }}
+          />
+        )}
+        <input
+          accept="image/*"
+          style={{ display: 'none' }}
+          id="line-graph-candle-input"
+          type="file"
+          onChange={handleLineGraphCandleChange}
+        />
+        <label htmlFor="line-graph-candle-input">
+          <IconButton color="primary" aria-label="upload line graph candle" component="span">
+            <UploadFile />
+          </IconButton>
+        </label>
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+
         <Typography variant="subtitle1" sx={{ mb: 2 }}>
           Signal Candle
         </Typography>
@@ -309,6 +543,8 @@ const MgiStrategy = () => {
             <UploadFile />
           </IconButton>
         </label>
+</Grid>
+<Grid item xs={12} sm={6}>
 
         <Typography variant="subtitle1" sx={{ mb: 2, mt: 2 }}>
           Hour Candle
@@ -339,6 +575,8 @@ const MgiStrategy = () => {
             <UploadFile />
           </IconButton>
         </label>
+</Grid>
+<Grid item xs={12} sm={6}>
 
         <Typography variant="subtitle1" sx={{ mb: 2, mt: 2 }}>
           Two Hour Candle
@@ -369,6 +607,8 @@ const MgiStrategy = () => {
             <UploadFile />
           </IconButton>
         </label>
+</Grid>
+<Grid item xs={12} sm={6}>
 
         <Typography variant="subtitle1" sx={{ mb: 2, mt: 2 }}>
           Entry Candle
@@ -399,6 +639,8 @@ const MgiStrategy = () => {
             <UploadFile />
           </IconButton>
         </label>
+</Grid>
+<Grid item xs={12} sm={6}>
 
         <Typography variant="subtitle1" sx={{ mb: 2, mt: 2 }}>
           Breakeven Candle
@@ -429,6 +671,8 @@ const MgiStrategy = () => {
             <UploadFile />
           </IconButton>
         </label>
+</Grid>
+<Grid item xs={12} sm={6}>
 
         <Typography variant="subtitle1" sx={{ mb: 2, mt: 2 }}>
           Take Profit Candle
@@ -459,6 +703,242 @@ const MgiStrategy = () => {
             <UploadFile />
           </IconButton>
         </label>
+
+</Grid>
+<Grid item xs={12} sm={6}>
+
+        {/* Monday Candle */}
+<Typography variant="subtitle1" sx={{ mb: 2, mt: 2 }}>
+  Monday Candle
+</Typography>
+{mondayCandleUrl && (
+  <img
+    src={mondayCandleUrl}
+    alt="Monday Candle"
+    style={{
+      width: '100%',
+      height: 'auto',
+      display: 'block',
+      borderRadius: 4,
+      border: '2px solid #ccc',
+      objectFit: 'cover',
+    }}
+  />
+)}
+<input
+  accept="image/*"
+  style={{ display: 'none' }}
+  id="monday-candle-input"
+  type="file"
+  onChange={handleMondayCandleChange}
+/>
+<label htmlFor="monday-candle-input">
+  <IconButton color="primary" aria-label="upload monday candle" component="span">
+    <UploadFile />
+  </IconButton>
+
+</label>
+
+</Grid>
+<Grid item xs={12} sm={6}>
+
+{/* Tuesday Candle */}
+<Typography variant="subtitle1" sx={{ mb: 2, mt: 2 }}>
+  Tuesday Candle
+</Typography>
+{tuesdayCandleUrl && (
+  <img
+    src={tuesdayCandleUrl}
+    alt="Tuesday Candle"
+    style={{
+      width: '100%',
+      height: 'auto',
+      display: 'block',
+      borderRadius: 4,
+      border: '2px solid #ccc',
+      objectFit: 'cover',
+    }}
+  />
+)}
+<input
+  accept="image/*"
+  style={{ display: 'none' }}
+  id="tuesday-candle-input"
+  type="file"
+  onChange={handleTuesdayCandleChange}
+/>
+<label htmlFor="tuesday-candle-input">
+  <IconButton color="primary" aria-label="upload tuesday candle" component="span">
+    <UploadFile />
+  </IconButton>
+</label>
+</Grid>
+<Grid item xs={12} sm={6}>
+
+{/* Wednesday Candle */}
+<Typography variant="subtitle1" sx={{ mb: 2, mt: 2 }}>
+  Wednesday Candle
+</Typography>
+{wednesdayCandleUrl && (
+  <img
+    src={wednesdayCandleUrl}
+    alt="Wednesday Candle"
+    style={{
+      width: '100%',
+      height: 'auto',
+      display: 'block',
+      borderRadius: 4,
+      border: '2px solid #ccc',
+      objectFit: 'cover',
+    }}
+  />
+)}
+<input
+  accept="image/*"
+  style={{ display: 'none' }}
+  id="wednesday-candle-input"
+  type="file"
+  onChange={handleWednesdayCandleChange}
+/>
+<label htmlFor="wednesday-candle-input">
+  <IconButton color="primary" aria-label="upload wednesday candle" component="span">
+    <UploadFile />
+  </IconButton>
+</label>
+</Grid>
+<Grid item xs={12} sm={6}>
+
+{/* Thursday Candle */}
+<Typography variant="subtitle1" sx={{ mb: 2, mt: 2 }}>
+  Thursday Candle
+</Typography>
+{thursdayCandleUrl && (
+  <img
+    src={thursdayCandleUrl}
+    alt="Thursday Candle"
+    style={{
+      width: '100%',
+      height: 'auto',
+      display: 'block',
+      borderRadius: 4,
+      border: '2px solid #ccc',
+      objectFit: 'cover',
+    }}
+  />
+)}
+<input
+  accept="image/*"
+  style={{ display: 'none' }}
+  id="thursday-candle-input"
+  type="file"
+  onChange={handleThursdayCandleChange}
+/>
+<label htmlFor="thursday-candle-input">
+  <IconButton color="primary" aria-label="upload thursday candle" component="span">
+    <UploadFile />
+  </IconButton>
+</label>
+</Grid>
+<Grid item xs={12} sm={6}>
+
+{/* Friday Candle */}
+<Typography variant="subtitle1" sx={{ mb: 2, mt: 2 }}>
+  Friday Candle
+</Typography>
+{fridayCandleUrl && (
+  <img
+    src={fridayCandleUrl}
+    alt="Friday Candle"
+    style={{
+      width: '100%',
+      height: 'auto',
+      display: 'block',
+      borderRadius: 4,
+      border: '2px solid #ccc',
+      objectFit: 'cover',
+    }}
+  />
+)}
+<input
+  accept="image/*"
+  style={{ display: 'none' }}
+  id="friday-candle-input"
+  type="file"
+  onChange={handleFridayCandleChange}
+/>
+<label htmlFor="friday-candle-input">
+  <IconButton color="primary" aria-label="upload friday candle" component="span">
+    <UploadFile />
+  </IconButton>
+</label>
+</Grid>
+<Grid item xs={12} sm={6}>
+
+{/* Saturday Candle */}
+<Typography variant="subtitle1" sx={{ mb: 2, mt: 2 }}>
+  Saturday Candle
+</Typography>
+{saturdayCandleUrl && (
+  <img
+    src={saturdayCandleUrl}
+    alt="Saturday Candle"
+    style={{
+      width: '100%',
+      height: 'auto',
+      display: 'block',
+      borderRadius: 4,
+      border: '2px solid #ccc',
+      objectFit: 'cover',
+    }}
+  />
+)}
+<input
+  accept="image/*"
+  style={{ display: 'none' }}
+  id="saturday-candle-input"
+  type="file"
+  onChange={handleSaturdayCandleChange}
+/>
+<label htmlFor="saturday-candle-input">
+  <IconButton color="primary" aria-label="upload saturday candle" component="span">
+    <UploadFile />
+  </IconButton>
+</label>
+</Grid>
+<Grid item xs={12} sm={6}>
+
+{/* Sunday Candle */}
+<Typography variant="subtitle1" sx={{ mb: 2, mt: 2 }}>
+  Sunday Candle
+</Typography>
+{sundayCandleUrl && (
+  <img
+    src={sundayCandleUrl}
+    alt="Sunday Candle"
+    style={{
+      width: '100%',
+      height: 'auto',
+      display: 'block',
+      borderRadius: 4,
+      border: '2px solid #ccc',
+      objectFit: 'cover',
+    }}
+  />
+)}
+<input
+  accept="image/*"
+  style={{ display: 'none' }}
+  id="sunday-candle-input"
+  type="file"
+  onChange={handleSundayCandleChange}
+/>
+<label htmlFor="sunday-candle-input">
+  <IconButton color="primary" aria-label="upload sunday candle" component="span">
+    <UploadFile />
+  </IconButton>
+</label>
+</Grid>
+</Grid>
       </Box>
 
       </Box>

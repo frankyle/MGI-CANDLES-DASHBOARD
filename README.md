@@ -24,3 +24,6 @@
 
 # Paid page for signals
 ![alt text](image-8.png)
+
+# Added Daily Candles tracking 
+![alt text](image-9.png)
