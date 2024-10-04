@@ -7,17 +7,36 @@ class MgiCandles(models.Model):
     # Trade Details
     trade_signal = models.CharField(max_length=4, choices=(("buy", "Buy"), ("sell", "Sell")), null=True, blank=True)
     is_active = models.BooleanField(default=False, null=True, blank=True)
-    
+
+    # New fields
+    idea_candle = models.ImageField(upload_to='idea_candles/', null=True, blank=True)
+    line_graph_candle = models.ImageField(upload_to='line_graph_candles/', null=True, blank=True)
+
     # Existing fields
     signal_candle = models.ImageField(upload_to='signal_candles/', null=True, blank=True)
-    hour_candle = models.ImageField(upload_to='hour_candles/', null=True, blank=True)
     two_hour_candle = models.ImageField(upload_to='two_hour_candles/', null=True, blank=True)
+    
+    # New fields
+    monday_candle = models.ImageField(upload_to='monday_candles/', null=True, blank=True)
+    tuesday_candle = models.ImageField(upload_to='tuesday_candles/', null=True, blank=True)
+    wednesday_candle = models.ImageField(upload_to='wednesday_candles/', null=True, blank=True)
+    thursday_candle = models.ImageField(upload_to='thursday_candles/', null=True, blank=True)
+    friday_candle = models.ImageField(upload_to='friday_candles/', null=True, blank=True)
+    saturday_candle = models.ImageField(upload_to='saturday_candles/', null=True, blank=True)
+    sunday_candle = models.ImageField(upload_to='sunday_candles/', null=True, blank=True)
+    
+    # New fields
+    pips_lost = models.DecimalField(max_digits=10, blank=True, null=True, decimal_places=2, default=0)
+    pips_gained = models.DecimalField(max_digits=10, blank=True, null=True, decimal_places=2, default=0)
+    
+
+    # Existing fields
+    hour_candle = models.ImageField(upload_to='hour_candles/', null=True, blank=True)
     entry_candle = models.ImageField(upload_to='entry_candle/', null=True, blank=True)
     breakeven_candle = models.ImageField(upload_to='breakeven_candle/', null=True, blank=True)
     take_profit_candle = models.ImageField(upload_to='take_profit_candle/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    # New fields
     candle_pattern = models.CharField(
         max_length=20,
         choices=(
@@ -50,7 +69,6 @@ class MgiCandles(models.Model):
     )
     currency_pair = models.CharField(max_length=6, null=True, blank=True)
 
-     # New fields
     five_min_order_block = models.BooleanField(default=False, null=True, blank=True)
     flip_four_hour_candle = models.BooleanField(default=False, null=True, blank=True)
     four_hour_break_of_structure = models.BooleanField(default=False, null=True, blank=True)

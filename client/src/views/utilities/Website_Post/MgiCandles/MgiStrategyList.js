@@ -146,12 +146,23 @@ const MgiStrategyList = () => {
               <TableCell>5Min Break of Structure</TableCell>
               <TableCell>5Min Order Block</TableCell>
               <TableCell>UT Alert (Change Color)</TableCell>
+              <TableCell>Idea Candle</TableCell>
+              <TableCell>Line Graph Candle</TableCell>
               <TableCell>Signal Candle</TableCell>
               <TableCell>2hr Hour Candle</TableCell>      
               <TableCell>1hr Candle</TableCell>
               <TableCell>Entry Candle</TableCell>         
               <TableCell>Breakeven Candle</TableCell>     
               <TableCell>Take Profit Candle</TableCell>   
+              <TableCell>MONDAY</TableCell>
+              <TableCell>TUESDAY</TableCell>
+              <TableCell>WEDNESDAY</TableCell>
+              <TableCell>THURSDAY</TableCell>
+              <TableCell>FRIDAY</TableCell>
+              <TableCell>SATURDAY</TableCell>
+              <TableCell>SUNDAY</TableCell>
+              <TableCell>Pips Gained</TableCell>
+              <TableCell>Pips Risked</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -194,6 +205,27 @@ const MgiStrategyList = () => {
                     {candle.change_color_ut_alert ? 'Yes' : 'No'}
                   </span>
                 </TableCell>
+ 
+                <TableCell onClick={() => handleOpenImageModal(candle.idea_candle)}>
+                  {candle.idea_candle && (
+                    <img
+                      src={candle.idea_candle}
+                      alt="Idea Candle"
+                      style={{ cursor: 'pointer', width: '150px', height: '100px' }}
+                    />
+                  )}
+                </TableCell>
+
+                <TableCell onClick={() => handleOpenImageModal(candle.line_graph_candle)}>
+                  {candle.line_graph_candle && (
+                    <img
+                      src={candle.line_graph_candle}
+                      alt="Line Graph Candle"
+                      style={{ cursor: 'pointer', width: '150px', height: '100px' }}
+                    />
+                  )}
+                </TableCell>
+
                 <TableCell onClick={() => handleOpenImageModal(candle.signal_candle)}>
                   {candle.signal_candle && (
                     <img
@@ -203,6 +235,8 @@ const MgiStrategyList = () => {
                     />
                   )}
                 </TableCell>
+                
+                
 
                 <TableCell onClick={() => handleOpenImageModal(candle.two_hour_candle)}>
                   {candle.two_hour_candle && (
@@ -253,6 +287,66 @@ const MgiStrategyList = () => {
                   )}
                 </TableCell>
 
+                <TableCell onClick={() => handleOpenImageModal(candle.monday_candle)}>
+                  {candle.monday_candle && (
+                    <img
+                      src={candle.monday_candle}
+                      alt="Monday Candle"
+                      style={{ cursor: 'pointer', width: '150px', height: '100px' }}
+                    />
+                  )}
+                </TableCell><TableCell onClick={() => handleOpenImageModal(candle.tuesday_candle)}>
+                  {candle.tuesday_candle && (
+                    <img
+                      src={candle.tuesday_candle}
+                      alt="Tuesday Candle"
+                      style={{ cursor: 'pointer', width: '150px', height: '100px' }}
+                    />
+                  )}
+                </TableCell><TableCell onClick={() => handleOpenImageModal(candle.wednesday_candle)}>
+                  {candle.wednesday_candle && (
+                    <img
+                      src={candle.wednesday_candle}
+                      alt="Wednesday Candle"
+                      style={{ cursor: 'pointer', width: '150px', height: '100px' }}
+                    />
+                  )}
+                </TableCell><TableCell onClick={() => handleOpenImageModal(candle.thursday_candle)}>
+                  {candle.thursday_candle && (
+                    <img
+                      src={candle.thursday_candle}
+                      alt="Thursday Candle"
+                      style={{ cursor: 'pointer', width: '150px', height: '100px' }}
+                    />
+                  )}
+                </TableCell><TableCell onClick={() => handleOpenImageModal(candle.friday_candle)}>
+                  {candle.friday_candle && (
+                    <img
+                      src={candle.friday_candle}
+                      alt="Friday Candle"
+                      style={{ cursor: 'pointer', width: '150px', height: '100px' }}
+                    />
+                  )}
+                </TableCell><TableCell onClick={() => handleOpenImageModal(candle.saturday_candle)}>
+                  {candle.saturday_candle && (
+                    <img
+                      src={candle.saturday_candle}
+                      alt="Saturday Candle"
+                      style={{ cursor: 'pointer', width: '150px', height: '100px' }}
+                    />
+                  )}
+                </TableCell><TableCell onClick={() => handleOpenImageModal(candle.sunday_candle)}>
+                  {candle.sunday_candle && (
+                    <img
+                      src={candle.sunday_candle}
+                      alt="Sunday Candle"
+                      style={{ cursor: 'pointer', width: '150px', height: '100px' }}
+                    />
+                  )}
+                </TableCell>
+                <TableCell>{candle.pips_gained}</TableCell>
+                <TableCell>{candle.pips_lost}</TableCell>
+                
                 <TableCell>
                   <IconButton color="primary" onClick={() => handleEdit(candle)}>
                     <Edit />
